@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     label: { fontWeight: '500' },
     labelTitle: { fontWeight: 'bold',},
     flatListItem: {
-        color: 'white',
+        color: 'black',
         padding: 5,
         fonSize: 12,
     },
@@ -52,9 +52,9 @@ export default class PetDetails extends React.Component {
             }}>
                 <View style={{
                     flex:1,
-                    backgroundColor: '#4BD069',
+                    backgroundColor: 'white',
                     flexDirection: 'row',
-                    borderRadius: 5,
+                    borderRadius: 0,
                 }}>
 
                     {/* Her deklareres at dyre billede skal vises fra vores flatListData.js */}
