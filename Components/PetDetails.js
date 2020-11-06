@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, ActivityIndicator} from 'react-native';
+import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, ActivityIndicator, Image} from 'react-native';
 import firebase from 'firebase';
 import { YellowBox } from 'react-native';
 import _ from 'lodash';
 import Constants from 'expo-constants';
 import UserItem from './Api/UserItem';
+import {Title} from "react-native-paper";
 
 const USERS_URL = 'https://randomuser.me/api?results=1';
 
@@ -26,6 +27,16 @@ const styles = StyleSheet.create({
     },
     label: { width: 100, fontWeight: 'bold' },
     value: { flex: 1 },
+    titlePet: {
+        alignContent: 'center',
+        marginLeft: 150,
+        marginBottom: 20,
+
+    },
+    textDescription: {
+        fontSize: 14,
+
+    }
 });
 
 export default class CarDetails extends React.Component {
@@ -47,7 +58,7 @@ export default class CarDetails extends React.Component {
     };
 
     componentDidMount() {
-        // Vi udlæser ID fra navgation parametre og loader bilen når komponenten starter
+        // Vi udlæser ID fra navgation parametre
         const id = this.props.navigation.getParam('id');
         this.loadPet(id);
 
@@ -136,15 +147,29 @@ export default class CarDetails extends React.Component {
         const  { pet } = this.state;
         const { isLoading, users, error } = this.state;
 
+
+
         if(!pet) {
             return <Text>Error</Text>;
         }
         return (
             <View style={styles.container}>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Titel</Text>
-                    <Text style={styles.value}>{pet.title}</Text>
+                <View style={styles.titlePet}>
+                    <Title style={styles.value}>{pet.title}</Title>
                 </View>
+
+                {/* billede ind her */}
+
+                <View style={styles.titlePet}>
+                    <Image
+                        source={{uri: pet.image}}
+                        style={{width: 100, height: 100, margin:5}}>
+                    </Image>
+                </View>
+                <View style={styles.textDescription}>
+                    <Text style={styles.value}>{pet.extra}</Text>
+                </View>
+
                 <View style={styles.row}>
                     <Text style={styles.label}>Type</Text>
                     <Text style={styles.value}>{pet.type}</Text>
@@ -166,8 +191,8 @@ export default class CarDetails extends React.Component {
                     <Text style={styles.value}>{pet.lokation}</Text>
                 </View>
                 <View style={styles.row}>
-                    <Text style={styles.label}>Ekstra Information</Text>
-                    <Text style={styles.value}>{pet.extra}</Text>
+                    <Text style={styles.label}>Pris</Text>
+                    <Text style={styles.value}>{pet.price} DKK</Text>
                 </View>
                 {/* Hvis state.isLoading er true, viser vi en spinner */}
                 {isLoading && <ActivityIndicator />}
