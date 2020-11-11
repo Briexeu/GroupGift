@@ -27,10 +27,12 @@ const styles = StyleSheet.create({
     flatListItem: {
         color: 'black',
         padding: 5,
-        fonSize: 12,
+        fonSize: 16,
     },
     flatListDyr: {
         fontWeight: 'bold',
+        fontSize: 13,
+        justifyContent: 'center',
         padding: 3,
     },
 
@@ -69,9 +71,12 @@ export default class PetDetails extends React.Component {
                             height: 100,
                          }}>
                         {/* Her deklareres hvad der skal vises fra vores flatlist af tekst / variable fra vores flatListData.js */}
-                            <Text style={styles.flatListDyr}>Dyr: {pet.title}</Text>
-                            <Text style={styles.flatListItem}> Type: {pet.type}</Text>
+                            <Text style={styles.flatListDyr}>{pet.title}</Text>
+                            <Text style={styles.flatListItem}>Race: {pet.race}</Text>
                             <Text style={styles.flatListItem}>Alder: {pet.alder}</Text>
+                            <Text style={styles.flatListItem}>Pris: {pet.price} DKK                 {pet.lokation} </Text>
+
+
                         </View>
                     </TouchableOpacity>
                 </View>
