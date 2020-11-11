@@ -9,7 +9,9 @@ export default class PetList extends React.Component {
     state = {
         pets: {},
     };
-
+    static navigationOptions = {
+        title: 'Feed'
+    }
     componentDidMount() {
         firebase
             .database()

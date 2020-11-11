@@ -39,6 +39,11 @@ const styles = StyleSheet.create({
 });
 
 export default class PetDetails extends React.Component {
+
+    static navigationOptions = ({ navigation}) => {
+        let headerTitle = 'Main';
+        return (headerTitle)
+    }
     handlePress = () => {
         // Her pakker vi ting ud fra props
         const {id, onSelect} = this.props
