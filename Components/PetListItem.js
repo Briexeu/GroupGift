@@ -75,8 +75,6 @@ export default class PetDetails extends React.Component {
                             <Text style={styles.flatListItem}>Race: {pet.race}</Text>
                             <Text style={styles.flatListItem}>Alder: {pet.alder}</Text>
                             <Text style={styles.flatListItem}>Pris: {pet.price} DKK                 {pet.lokation} </Text>
-
-
                         </View>
                     </TouchableOpacity>
                 </View>
