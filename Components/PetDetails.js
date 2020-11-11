@@ -39,6 +39,22 @@ const styles = StyleSheet.create({
 });
 
 export default class CarDetails extends React.Component {
+    static navigationOptions = ({ navigation }) => {
+        let headerTitle ='Bandit';
+        let headerRight = (<Button
+            title={"Bandit"}
+        containerStyle={{margin: 5, padding: 10, borderRadius: 10, backgroundColor: 'darkviolet'}}
+        style={{fontSize: 15, color: 'white'}}
+        onPress={() => {
+
+        }}
+        >
+        I am just human
+        </Button>);
+
+        return {headerTitle, headerRight}
+    }
+
     state = {
         pet: null,
         users: null,

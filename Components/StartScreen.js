@@ -18,7 +18,7 @@ import Onboarding from "react-native-onboarding-swiper";
 export default class StartScreen extends React.Component {
 
     static navigationOptions = {
-        title: 'StartPage'
+        title: 'Bandit'
     }
 
     handleGoToSignUp = () => {
