@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import Constants from 'expo-constants';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -80,14 +79,14 @@ export default class App extends React.Component {
     UNSAFE_componentWillMount() {
 
         const firebaseConfig = {
-            apiKey: "AIzaSyAOV24fGQrssL2omG442QyZ_1dOLL_XTCg",
-            authDomain: "projectforgroupgift.firebaseapp.com",
-            databaseURL: "https://projectforgroupgift.firebaseio.com",
-            projectId: "projectforgroupgift",
-            storageBucket: "projectforgroupgift.appspot.com",
-            messagingSenderId: "962712843146",
-            appId: "1:962712843146:web:434ff602e9764fa617ce73",
-            measurementId: "G-77E6TP16MG"
+            apiKey: "AIzaSyA5B-q7rhRl6W7ncIItMofJ5sNVrhOm-7g",
+            authDomain: "groupgift-v2.firebaseapp.com",
+            databaseURL: "https://groupgift-v2.firebaseio.com",
+            projectId: "groupgift-v2",
+            storageBucket: "groupgift-v2.appspot.com",
+            messagingSenderId: "630041584773",
+            appId: "1:630041584773:web:6e3b193f06e0feb2b075ec",
+            measurementId: "G-5X5CXH2QFZ"
 
         };
 
