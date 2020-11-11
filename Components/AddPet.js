@@ -8,9 +8,10 @@ import {
     Alert,
     ScrollView,
     SafeAreaView,
+    TouchableOpacity,
 } from 'react-native';
 import firebase from 'firebase'
-import TouchableOpacity from "react-native-web/src/exports/TouchableOpacity";
+
 
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: 'center' },
