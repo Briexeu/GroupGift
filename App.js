@@ -15,24 +15,27 @@ import LoginForm from "./Components/User/LoginForm";
 import SignUpForm from "./Components/User/SignUpForm";
 
 
-
+const LoginNavigator = createStackNavigator(
+    {
+        StartScreen: { screen: StartScreen},
+        LoginForm: { screen : LoginForm },
+        SignUpForm: { screen : SignUpForm },}
+)
 
 const StackNavigator = createStackNavigator(
     {
-        StartScreen: {screen: StartScreen},
         PetList: { screen: PetList },
         PetDetails: { screen: PetDetails },
         EditPet:{screen: EditPet},
         Indstillinger: { screen: Indstillinger},
-        LoginForm: { screen : LoginForm },
-        SignUpForm: { screen : SignUpForm },
+
     },
     { initialRouteKey: 'EditList' }
 );
 
 const TabNavigator = createBottomTabNavigator({
     Main: {
-        screen: StackNavigator,
+        screen: LoginNavigator,
         navigationOptions: {
             tabBarLabel: "Forside",
             tabBarIcon: ({tintColor}) => (
@@ -41,7 +44,7 @@ const TabNavigator = createBottomTabNavigator({
         }
     },
     Add1: {
-        screen: PetList,
+        screen: StackNavigator,
         navigationOptions: {
             tabBarLabel: "Oversigt",
             tabBarIcon: ({tintColor}) => (
@@ -69,6 +72,7 @@ const TabNavigator = createBottomTabNavigator({
     },
 
 });
+
 
 const AppContainer = createAppContainer(TabNavigator);
 

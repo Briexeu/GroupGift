@@ -21,6 +21,7 @@ export default class PetList extends React.Component {
 
     handleSelectPet = id => {
         this.props.navigation.navigate('PetDetails', { id });
+
     };
     renderSeparator = () => {
         return (
@@ -35,7 +36,6 @@ export default class PetList extends React.Component {
     };
 
     render() {
-
         const { pets } = this.state;
         // Vi viser ingenting hvis der ikke er data
         if (!pets) {

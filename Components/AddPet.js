@@ -9,9 +9,15 @@ import {
     ScrollView,
     SafeAreaView,
     TouchableOpacity,
+    Linking,
 } from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import firebase from 'firebase'
+import * as Permissions from 'expo-permissions';
+import * as MediaLibrary from 'expo-media-library';
+import Image from "react-native";
+import FlatList from "react-native";
+
 
 
 const styles = StyleSheet.create({
@@ -44,8 +50,57 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderWidth: 1,
         placeholderTextColor: 'gray',
-    }
+    },
+        btn:{
+            margin:100
+        },
+        Flatlist_render:{
+            width:'100%'
+        },
+        cameraContainer: {
+            // Her pakkes fælles style ud
+            ...containerStyle,
+            backgroundColor: '#DDF',
 
+        },
+        cameraView: {
+            marginTop: 100,
+            marginLeft: 10,
+            marginBottom:15,
+            aspectRatio: 1.2,
+            width: '100%',
+            height: 270
+        },
+        lastPhotoContainer: {
+            backgroundColor: '#DFF',
+            width: '100%',
+            height: 130,
+            margin: 0
+        },
+        galleryContainer: {
+            ...containerStyle,
+            backgroundColor: '#FDF',
+            marginBottom: 100
+        },
+        thumbnail: {
+            width: 110,
+            height: 110,
+            marginLeft: 140
+        },thumbnail2: {
+            width: 200,
+            height: 200,
+            margin: 10,
+        },
+        FlatList_image:{
+            width: 200,
+            height: 200,
+            margin: 5
+        },
+        galleryView: {
+            height: 150,
+            width: '100%',
+            flexDirection: 'row',
+        },
 });
 
 export default class AddPet extends React.Component {
@@ -59,6 +114,11 @@ export default class AddPet extends React.Component {
         extra: '',
         image: '',
         price: '',
+        lastPhoto:null,
+        hasCameraRollPermission: null,
+        galleryImages: null,
+        showGallery: true
+
     };
     handleTitleChange = text => this.setState({ title: text });
 
@@ -77,14 +137,6 @@ export default class AddPet extends React.Component {
     handleImageChange = text => this.setState({ image: text });
 
     handlePriceChange = text => this.setState({ price: text });
-
-    /*handleChoosePhoto = () => {
-        ImagePicker.launchImageLibrary(options, response => {
-            consolge.log("response", response);
-        })
-    }
-
-     */
 
     handleSave = () => {
         const { title, type, race, alder, gender, lokation, extra, image, price } = this.state;
@@ -110,6 +162,74 @@ export default class AddPet extends React.Component {
         }
     };
 
+    cameraRef = React.createRef();
+
+    componentDidMount() {
+        this.updateCameraRollPermission();
+    }
+
+    /*Få adgang til galleri*/
+    updateCameraRollPermission = async () => {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        this.setState({ hasCameraRollPermission: status === 'granted' });
+    };
+
+    handleSettingLink = () =>{
+        Linking.openSettings()
+    }
+
+    // Hent 3 billeder fra galleriet
+    handleLoadGalleryImages = async () => {
+        try {
+            const result =  await MediaLibrary.getAssetsAsync({first:20});
+            this.setState({ galleryImages:result.assets });
+        }catch (e) {
+            console.log(e)
+        }
+    };
+
+    renderGalleryView() {
+        // Vi ingenting så længe vi venter på input fra bruger
+        const { hasCameraRollPermission, galleryImages } = this.state;
+        if (hasCameraRollPermission === null) {
+            return <View />;
+        }
+        // Vis en fejlbesked og en knap til settings hvis brugeren ikke har accepteret adgang
+        if (hasCameraRollPermission === false) {
+            return (
+                <View>
+                    <Text>No access to camera roll.</Text>
+                    <Button title="Go to settings" onPress={this.handleSettingLink} />
+                </View>
+            );
+        }
+        // Her looper vi igennem den liste af billeder som er modtaget fra CameraRoll
+        return (
+            <View>
+                <Button title="Load images" onPress={this.handleLoadGalleryImages} />
+                <View style={styles.galleryView}>
+                    {galleryImages && (
+                        <FlatList
+                            horizontal
+                            styles={styles.Flatlist_render}
+                            data={galleryImages}
+                            // Vi sender vores item, som er den enkelte user, med som prop til UserItem
+                            // Vi sender også vores event handler med som prop, så UserItem ikke skal håndtere navigation
+                            // this.handleSelectUser modtager en user som argument
+                            renderItem={({ item }) => (
+                                <Image
+                                    source={{ uri: item.uri}}
+                                    key={item.uri}
+                                    style={styles.FlatList_image}
+                                />
+                            )}
+                            keyExtractor={item => item.id}
+                        />
+                    )}
+                </View>
+            </View>
+        );
+    }
     render() {
         const { title, type, race, alder, gender, lokation, extra, image, price,} = this.state;
 
@@ -205,7 +325,17 @@ export default class AddPet extends React.Component {
                     </View>
                     <Button title="Tilføj Dyr" onPress={this.handleSave} />
                 </ScrollView>
+                    <View style={styles.galleryContainer}>{this.renderGalleryView()}</View>
+
             </SafeAreaView>
         );
     }
 }
+const containerStyle = {
+    padding: 5,
+    borderRadius: 1,
+    margin: 4,
+    borderWidth: 1,
+};
+
+
