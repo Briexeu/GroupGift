@@ -3,7 +3,6 @@ import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, ActivityIndic
 import firebase from 'firebase';
 import { YellowBox } from 'react-native';
 import _ from 'lodash';
-import Constants from 'expo-constants';
 import UserItem from './Api/UserItem';
 import {Title} from "react-native-paper";
 

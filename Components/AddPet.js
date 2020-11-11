@@ -8,12 +8,11 @@ import {
     Alert,
     ScrollView,
     SafeAreaView,
-    Picker,
+    TouchableOpacity,
 } from 'react-native';
 import {RadioButton} from 'react-native-paper';
 import firebase from 'firebase'
-//import ImagePicker from 'react-native-image-picker';
-import TouchableOpacity from "react-native-web/src/exports/TouchableOpacity";
+
 
 const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: 'center' },
