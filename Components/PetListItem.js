@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flatListItem: {
         color: 'black',
         padding: 5,
-        fonSize: 16,
+        fontSize: 16,
     },
     flatListDyr: {
         fontWeight: 'bold',

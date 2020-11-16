@@ -11,7 +11,6 @@ import {
     TouchableOpacity,
     Linking,
 } from 'react-native';
-import {RadioButton} from 'react-native-paper';
 import firebase from 'firebase'
 import * as Permissions from 'expo-permissions';
 import * as MediaLibrary from 'expo-media-library';
@@ -42,14 +41,14 @@ const styles = StyleSheet.create({
         height: 60,
         borderColor: 'gray',
         borderWidth: 1,
-        placeholderTextColor: 'gray',
+        //placeholderTextColor: 'gray',
     },
     inputSmall: {
         flex: 1,
         height: 30,
         borderColor: 'gray',
         borderWidth: 1,
-        placeholderTextColor: 'gray',
+        //placeholderTextColor: 'gray',
     },
         btn:{
             margin:100
