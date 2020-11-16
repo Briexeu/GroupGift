@@ -86,6 +86,7 @@ export default class SignUpForm extends React.Component{
     };
 }
 
+
 //styling af de forskellige komponenter
 const styles = StyleSheet.create({
     container: {
