@@ -35,6 +35,7 @@ export default class LoginForm extends React.Component{
             console.log(result);
             this.endLoading();
             this.setState({ isCompleted: true });
+            this.props.navigation.navigate('PetList')
         } catch (error) {
             this.setError(error.message);
             this.endLoading();
