@@ -1,7 +1,8 @@
 //lavet af Frederik Reippuert
-import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator} from "react-native";
+import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator, Alert} from "react-native";
 import * as React from "react";
 import * as firebase from "firebase";
+
 
 
 export default class SignUpForm extends React.Component{
@@ -35,6 +36,8 @@ export default class SignUpForm extends React.Component{
             console.log(result);
             this.endLoading();
             this.setState({ isCompleted: true });
+            Alert.alert('Du har nu oprettet dig som bruger')
+            this.props.navigation.navigate('LoginForm')
         } catch (error) {
             // Vi sender `message` feltet fra den error der modtages, videre.
             this.setError(error.message);
