@@ -1,3 +1,5 @@
+//Denne komponent er udarbejdet af Sebastian
+
 import * as React from 'react';
 import {
     View,
@@ -67,13 +69,13 @@ export default class PetDetails extends React.Component {
                     {/* Her deklareres at dyre billede skal vises fra vores flatListData.js */}
                     <Image
                         source={{uri: pet.image}}
-                        style={{width: 100, height: 100, margin:5}}>
+                        style={{width: 110, height: 125, margin:5, borderRadius: 30/ 2}}>
                     </Image>
                     <TouchableOpacity onPress={this.handlePress}>
                         <View style={{
                             flex: 1,
                             flexDirection: 'column',
-                            height: 100,
+                            height: 125,
                          }}>
                         {/* Her deklareres hvad der skal vises fra vores flatlist af tekst / variable fra vores flatListData.js */}
                             <Text style={styles.flatListDyr}>{pet.title}</Text>

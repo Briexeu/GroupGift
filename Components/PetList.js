@@ -1,3 +1,4 @@
+//Denne komponent er udarbejdet af Sebastian
 
 import * as React from 'react';
 import {View, Text, FlatList, TouchableOpacity, Button} from 'react-native';
@@ -9,8 +10,10 @@ export default class PetList extends React.Component {
     state = {
         pets: {},
     };
-    static navigationOptions = {
-        title: 'Feed'
+    static navigationOptions = ({ navigation }) => {
+        let headerTitle ='                                           Feed                    ';
+
+        return {headerTitle}
     }
     componentDidMount() {
         firebase
