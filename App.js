@@ -1,3 +1,4 @@
+//Lavet af Magnus Espensen
 import firebase from 'firebase';
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';

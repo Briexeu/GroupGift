@@ -1,3 +1,4 @@
+//Lavet af Magnus Espensen
 import * as React from 'react';
 import {View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
