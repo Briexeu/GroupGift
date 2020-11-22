@@ -1,5 +1,7 @@
+//Denne komponent er udarbejdet af Sebastian
+
 import * as React from 'react';
-import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, ActivityIndicator, Image} from 'react-native';
+import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, ActivityIndicator, Image, ScrollView} from 'react-native';
 import firebase from 'firebase';
 import { YellowBox } from 'react-native';
 import _ from 'lodash';
@@ -28,19 +30,21 @@ const styles = StyleSheet.create({
     value: { flex: 1 },
     titlePet: {
         alignContent: 'center',
-        marginLeft: 150,
-        marginBottom: 20,
+        marginLeft: 125,
+        marginBottom: 5,
+        marginTop: 5,
 
     },
     textDescription: {
         fontSize: 14,
+        margin: 10,
 
     }
 });
 
-export default class CarDetails extends React.Component {
+export default class PetDetails extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        let headerTitle ='Bandit';
+        let headerTitle ='Kæledyrs detaljer';
         let headerRight = (<Button
             title={"Bandit"}
         containerStyle={{margin: 5, padding: 10, borderRadius: 10, backgroundColor: 'darkviolet'}}
@@ -52,7 +56,7 @@ export default class CarDetails extends React.Component {
         I am just human
         </Button>);
 
-        return {headerTitle, headerRight}
+        return {headerTitle}
     }
 
     state = {
@@ -138,6 +142,7 @@ export default class CarDetails extends React.Component {
     };
 
 
+
     // Vi sletter det aktuelle pet
     handleDelete = () => {
         const { navigation } = this.props;
@@ -168,21 +173,19 @@ export default class CarDetails extends React.Component {
             return <Text>Error</Text>;
         }
         return (
-            <View style={styles.container}>
+            <ScrollView style={{flex: 1}}>
                 <View style={styles.titlePet}>
-                    <Title style={styles.value}>{pet.title}</Title>
+                    <Title>Sig hej til {pet.title} 👋</Title>
                 </View>
-
-                {/* billede ind her */}
-
+                {/* Billede ind her */}
                 <View style={styles.titlePet}>
                     <Image
                         source={{uri: pet.image}}
-                        style={{width: 100, height: 100, margin:5}}>
+                        style={{width: 150, height: 150, margin:5}}>
                     </Image>
                 </View>
                 <View style={styles.textDescription}>
-                    <Text style={styles.value}>{pet.extra}</Text>
+                    <Text>{pet.extra}</Text>
                 </View>
 
                 <View style={styles.row}>
@@ -224,11 +227,12 @@ export default class CarDetails extends React.Component {
                         keyExtractor={item => item.login.uuid}
                     />
                 )}
-                {/* Hvis der er fejl, dvs. state.error er sat, viser vi fejlen */}
+                {/* {/* Hvis der er fejl, dvs. state.error er sat, viser vi fejlen
                 {error && <Text style={styles.error}>Error: {error}</Text>}
                 <Button title="Rediger" onPress={this.handleEdit} />
                 <Button title="Slet" onPress={this.handleDelete} />
-            </View>
+                */}
+            </ScrollView>
 
         );
 

@@ -37,6 +37,7 @@ export default class EditPet extends React.Component {
         lokation: '',
         extra: '',
         image: '',
+        price: '',
     };
 
     componentDidMount() {
@@ -51,8 +52,8 @@ export default class EditPet extends React.Component {
             .ref(`/Pets/${id}`)
             .once('value', dataObject => {
                 const pet = dataObject.val();
-                const { title, type, race, alder, gender, lokation, extra, image } = pet;
-                this.setState({ title, type, race, alder, gender, lokation, extra, image  });
+                const { title, type, race, alder, gender, lokation, extra, image, price } = pet;
+                this.setState({ title, type, race, alder, gender, lokation, extra, image, price  });
             });
     };
 
@@ -72,19 +73,21 @@ export default class EditPet extends React.Component {
 
     handleImageChange = text => this.setState({ image: text });
 
+    handlePriceChange = text => this.setState({ price: text });
+
 
 
     updateData = () => {
         // Vi bruger this.props.navigation flere steder så vi pakker den ud én gang for alle
         const { navigation } = this.props;
-        const { title, type, race, alder, gender, lokation, extra, image } = this.state;
+        const { title, type, race, alder, gender, lokation, extra, image, price } = this.state;
         const id = navigation.getParam('id');
         try {
             firebase
                 .database()
                 .ref(`/Pets/${id}`)
                 // Vi bruger update, så kun de felter vi angiver, bliver ændret
-                .update({ title, type, race, alder, gender, lokation, extra, image  });
+                .update({ title, type, race, alder, gender, lokation, extra, image, price  });
             // Når pettet er ændret, går vi tilbage.
             Alert.alert("Din info er nu opdateret");
             navigation.goBack();
@@ -94,7 +97,7 @@ export default class EditPet extends React.Component {
     };
 
     render() {
-        const { title, type, race, alder, gender, lokation, extra, image } = this.state;
+        const { title, type, race, alder, gender, lokation, extra, image, price } = this.state;
         return (
             <View style={styles.container}>
                 <ScrollView>
@@ -143,6 +146,14 @@ export default class EditPet extends React.Component {
                         <TextInput
                             value={lokation}
                             onChangeText={this.handleLokationChange}
+                            style={styles.input}
+                        />
+                    </View>
+                    <View style={styles.row}>
+                        <Text style={styles.label}>Pris*</Text>
+                        <TextInput
+                            value={price}
+                            onChangeText={this.handlePriceChange}
                             style={styles.input}
                         />
                     </View>
