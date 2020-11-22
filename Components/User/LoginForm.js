@@ -1,3 +1,4 @@
+//lavet af Frederik Reippuert
 import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import * as firebase from "firebase";

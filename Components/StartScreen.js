@@ -1,3 +1,4 @@
+//lavet af Frederik Reippuert
 import * as React from 'react';
 import {
     Text,
@@ -12,13 +13,11 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
 } from 'react-native';
-import Onboarding from "react-native-onboarding-swiper";
-
 
 export default class StartScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
-        let headerTitle ='                   Velkommen til PetApp';
+        let headerTitle ='Forside';
 
         return {headerTitle}
     }
@@ -37,22 +36,23 @@ export default class StartScreen extends React.Component {
     render(){
         return (
                 <View style={styles.container}>
-                    <Text style ={styles.welcometitle}>Welcome to PETPAL</Text>
+                    <Text style ={styles.welcometitle}>Velkommen til PetPal</Text>
                     <View style={styles.logoContainer}>
-
-                        <Text style={styles.buttontitle}>Here you can sign up or login</Text>
+                        <Image style ={styles.logo}
+                        source={{uri:'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAwlb3A.img?h=582&w=1119&m=6&q=60&u=t&o=f&l=f'}} />
+                        <Text style={styles.buttontitle}>Her kan du logge ind eller oprette dig</Text>
                     </View>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity
                             style={styles.button}
                             onPress={this.handleGoToSignUp}>
-                            <Text>Go to Sign up</Text>
+                            <Text>Opret bruger</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             style={styles.button}
                             onPress={this.handleGoToLogin}>
-                            <Text>Go to Login</Text>
+                            <Text>Login</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -1,3 +1,4 @@
+//lavet af Frederik Reippuert
 import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator} from "react-native";
 import * as React from "react";
 import * as firebase from "firebase";
