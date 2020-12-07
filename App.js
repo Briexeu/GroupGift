@@ -18,7 +18,7 @@ import SignUpForm from "./Components/User/SignUpForm";
 
 const LoginNavigator = createStackNavigator(
     {
-        StartScreen: { screen: StartScreen},
+        Indstillinger: { screen: Indstillinger},
         LoginForm: { screen : LoginForm },
         SignUpForm: { screen : SignUpForm },}
 )
@@ -28,7 +28,7 @@ const StackNavigator = createStackNavigator(
         PetList: { screen: PetList },
         PetDetails: { screen: PetDetails },
         EditPet:{screen: EditPet},
-        Indstillinger: { screen: Indstillinger},
+
 
     },
     { initialRouteKey: 'EditList' }

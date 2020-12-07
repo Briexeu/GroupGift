@@ -45,12 +45,12 @@ export default class LoginForm extends React.Component{
     render(){
         const { errorMessage, email, password, isCompleted } = this.state;
         if (isCompleted) {
-            return <Text>You are now logged in</Text>
+            return <Text>Du er nu logget ind</Text>
         }
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content"/>
-                <Text>Login - Ready to look at all the cute pets?</Text>
+                <Text>Login - Klar til at kigge på nogen søde kæledyr?</Text>
                 <TextInput placeholder ="Email"
                            value={email}
                            onChangeText={this.handleChangeEmail}
@@ -71,6 +71,8 @@ export default class LoginForm extends React.Component{
                     <Text style={styles.error}>Error: {errorMessage}</Text>
                 )}
                 {this.renderButton()}
+                {this.renderButton2()}
+                {this.renderButton3()}
             </View>
         )
     }
@@ -81,6 +83,20 @@ export default class LoginForm extends React.Component{
             return <ActivityIndicator />;
         }
         return <Button onPress={this.handleSubmit} title="Login" />;
+    };
+    renderButton2 = () => {
+        const { isLoading } = this.state;
+        if (isLoading) {
+            return <ActivityIndicator />;
+        }
+        return <Button onPress={this.handleSubmit} title="Opret Bruger!" />;
+    };
+    renderButton3 = () => {
+        const { isLoading } = this.state;
+        if (isLoading) {
+            return <ActivityIndicator />;
+        }
+        return <Button onPress={this.handleSubmit} title="Glemt Password?" />;
     };
 }
 

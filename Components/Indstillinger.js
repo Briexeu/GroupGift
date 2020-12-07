@@ -4,6 +4,8 @@ import {View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-na
 import Onboarding from 'react-native-onboarding-swiper';
 
 
+
+
 const Dots = ({selected}) => {
     let backgroundColor;
 
@@ -35,7 +37,7 @@ const Next = ({...props}) => (
         style={{marginHorizontal:10}}
         {...props}
     >
-        <Text style={{fontSize:16}}>Next</Text>
+        <Text style={{fontSize:16}}>Næste</Text>
     </TouchableOpacity>
 );
 
@@ -44,7 +46,7 @@ const Done = ({...props}) => (
         style={{marginHorizontal:10}}
         {...props}
     >
-        <Text style={{fontSize:16}}>Done</Text>
+        <Text style={{fontSize:16}}>Færdig</Text>
     </TouchableOpacity>
 );
 
@@ -55,26 +57,27 @@ const OnboardingScreen = ({navigation}) => {
             NextButtonComponent={Next}
             DoneButtonComponent={Done}
             DotComponent={Dots}
-            onSkip={() => navigation.navigate("test")}
-            onDone={() => navigation.navigate("test")}
+            onSkip={() => navigation.replace("LoginForm")}
+            onDone={() => navigation.replace("LoginForm")}
+
             pages={[
                 {
                     backgroundColor: '#a6e4d0',
-                    image: <Image source={require('../assets/petpal.png')} />,
-                    title: 'Frederecia please',
-                    subtitle: '',
+                    image: <Image source={require('../assets/PetPalLogo.png')} />,
+                    title: 'Velkommen til PetPal',
+                    subtitle: 'Den sikreste måde at få et nyt kæledyr',
                 },
                 {
                     backgroundColor: '#fdeb93',
-                    image: <Image source={require('../assets/petpal.png')} />,
-                    title: 'dont do this to me',
-                    subtitle: '',
+                    image: <Image source={require('../assets/sadDog.png')} />,
+                    title: 'Ingen forsømte kæledyr',
+                    subtitle: 'Vi vil bekæmpe trenden med at kæledyr bliver forsømt',
                 },
                 {
                     backgroundColor: '#e9bcbe',
-                    image: <Image source={require('../assets/petpal.png')} />,
-                    title: 'i beg u',
-                    subtitle: "",
+                    image: <Image source={require('../assets/verifieduser.png')} />,
+                    title: 'Bliv en verificeret bruger',
+                    subtitle: "Vi har en verifications process så alle er godkendte til at handle hos os!",
                 },
             ]}
         />
