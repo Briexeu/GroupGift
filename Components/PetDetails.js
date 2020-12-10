@@ -1,12 +1,13 @@
 //Denne komponent er udarbejdet af Sebastian
 
 import * as React from 'react';
-import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, ActivityIndicator, Image, ScrollView} from 'react-native';
+import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, TouchableOpacity, ActivityIndicator, Image, ScrollView} from 'react-native';
 import firebase from 'firebase';
 import { YellowBox } from 'react-native';
 import _ from 'lodash';
 import UserItem from './Api/UserItem';
 import {Title} from "react-native-paper";
+import NavigationBar from 'react-native-navbar-color'
 
 const USERS_URL = 'https://randomuser.me/api?results=1';
 
@@ -18,50 +19,12 @@ console.warn = message => {
     }
 };
 
-//styling
-const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'flex-start' },
-    row: {
-        margin: 5,
-        padding: 5,
-        flexDirection: 'row',
-    },
-    label: { width: 100, fontWeight: 'bold' },
-    value: { flex: 1 },
-    titlePet: {
-        padding:5,textAlign:'center'
-
-    },
-    textDescription: {
-        fontSize: 16,
-        margin: 10,
-
-    },
-    petBox:{
-        padding:5,margin:10,borderColor:'orange',borderBottomWidth:1
-    },
-    petBoxRow:{
-        padding:5,margin:5,borderColor:'orange',borderBottomWidth:1, flexDirection: 'row',
-    }
-});
-
 export default class PetDetails extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        let headerTitle ='Kæledyrs detaljer';
-        let headerRight = (<Button
-            title={"Bandit"}
-        containerStyle={{margin: 5, padding: 10, borderRadius: 10, backgroundColor: 'darkviolet'}}
-        style={{fontSize: 15, color: 'white'}}
-        onPress={() => {
-
-        }}
-        >
-        I am just human
-        </Button>);
+        let headerTitle ='                            Detaljer                    ';
 
         return {headerTitle}
     }
-
     state = {
         pet: null,
         users: null,
@@ -83,6 +46,7 @@ export default class PetDetails extends React.Component {
         // Vi udlæser ID fra navgation parametre
         const id = this.props.navigation.getParam('id');
         this.loadPet(id);
+
 
         this.loadUserProfiles();
     }
@@ -144,8 +108,6 @@ export default class PetDetails extends React.Component {
         }
     };
 
-
-
     // Vi sletter det aktuelle pet
     handleDelete = () => {
         const { navigation } = this.props;
@@ -178,6 +140,7 @@ export default class PetDetails extends React.Component {
         return (
             <ScrollView style={{flex: 1}}>
 
+                {/* Her laves velkomst, titel + billede vedr. kæledyret */}
                 <View style={styles.petBox}>
                     <Image
                         source={{uri: pet.image}}
@@ -187,81 +150,129 @@ export default class PetDetails extends React.Component {
                     <Text style={styles.textDescription}>{pet.extra}</Text>
                 </View>
 
-                <View style={styles.petBoxRow}>
-                    <Text style={{textAlign: 'center'}} title={'Praktiske information \n'}> </Text>
-
-                    <Text style={styles.label}>Type</Text>
-                    <Text style={styles.value}>{pet.type}</Text>
-
-
-                </View>
+                {/* Her laves afsnittet om praktiske information vedr. kæledyret */}
+                <View style={styles.petBox}>
+                    <View style={styles.row}>
+                        <Text style={styles.label}>Type</Text>
+                        <Text style={styles.value}>{pet.type}</Text>
+                    </View>
 
 
-                {/*
-                <View style={styles.titlePet}>
-                    <Title>Sig hej til {pet.title} 👋</Title>
+                    <View style={styles.row}>
+                        <Text style={styles.label}>Race</Text>
+                        <Text style={styles.value}>{pet.race}</Text>
+                    </View>
+
+                    <View style={styles.row}>
+                        <Text style={styles.label}>Køn</Text>
+                        <Text style={styles.value}>{pet.gender}</Text>
+                    </View>
+
+                    <View style={styles.row}>
+                        <Text style={styles.label}>Alder</Text>
+                        <Text style={styles.value}>{pet.alder}</Text>
+                    </View>
+
+                    <View style={styles.row}>
+                        <Text style={styles.label}>Pris</Text>
+                        <Text style={styles.value}>{pet.price} DKK</Text>
+                    </View>
+
                 </View>
 
-                <View style={styles.titlePet}>
-                    <Image
-                        source={{uri: pet.image}}
-                        style={{width: '100%', height: 250, margin:5}}>
-                    </Image>
-                </View>
-                <View style={styles.textDescription}>
-                    <Text>{pet.extra}</Text>
-                </View>
+                {/* Her laves kontakt kortet / information på sælger*/}
+                <View style={styles.petBoxContact}>
+                    <Title style={styles.titlePet}>Kontakt information</Title>
 
-                <View style={styles.row}>
-                    <Text style={styles.label}>Type</Text>
-                    <Text style={styles.value}>{pet.type}</Text>
+                    <TouchableOpacity style={styles.card}>
+                        <View style={styles.cardContent}>
+                            <Image style={[styles.image, styles.imageContent]} source={{uri: "https://bootdey.com/img/Content/avatar/avatar6.png"}}/>
+                            <Text style={styles.name}>{"Lars C. "}</Text>
+                        </View>
+                        <View style={[styles.cardContent, styles.tagsContent]}>
+                            <Text style={styles.value}>{pet.lokation} </Text>
+                        </View>
+                        <View style={[styles.cardContent, styles.tagsContent]}>
+                            <Text style={styles.label}>Email:</Text>
+                            <Text style={styles.value}>seja18ab@student.cbs.dk</Text>
+                        </View>
+                        <View style={[styles.cardContent, styles.tagsContent]}>
+                            <Text style={styles.label}>Telefon:</Text>
+                            <Text style={styles.value}> +45 31 15 40 14</Text>
+                        </View>
+                    </TouchableOpacity>
+
                 </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Race</Text>
-                    <Text style={styles.value}>{pet.race}</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Alder</Text>
-                    <Text style={styles.value}>{pet.alder}</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Køn</Text>
-                    <Text style={styles.value}>{pet.gender}</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Lokation</Text>
-                    <Text style={styles.value}>{pet.lokation}</Text>
-                </View>
-                <View style={styles.row}>
-                    <Text style={styles.label}>Pris</Text>
-                    <Text style={styles.value}>{pet.price} DKK</Text>
-                </View> */}
-                {/* Hvis state.isLoading er true, viser vi en spinner */}
-                {isLoading && <ActivityIndicator />}
-                {/* Hvis state.users er sat, viser vi listen af users */}
-                {users && (
-                    <FlatList
-                        data={users}
-                        // Vi sender vores item, som er den enkelte user, med som prop til UserItem
-                        // Vi sender også vores event handler med som prop, så UserItem ikke skal håndtere navigation
-                        // this.handleSelectUser modtager en user som argument
-                        renderItem={({ item }) => (
-                            <UserItem user={item} onSelect={this.handleSelectUser} />
-                        )}
-                        keyExtractor={item => item.login.uuid}
-                    />
-                )}
                 {/* Hvis der er fejl, dvs. state.error er sat, viser vi fejlen
                 {error && <Text style={styles.error}>Error: {error}</Text>}
                 <Button title="Rediger" onPress={this.handleEdit} />
                 <Button title="Slet" onPress={this.handleDelete} />
                 */}
-
             </ScrollView>
 
         );
-
-
-
     }
 }
+//Styling af diverse
+const styles = StyleSheet.create({
+    container: { flex: 1, justifyContent: 'flex-start' },
+    row: {
+        margin: 5,
+        padding: 5,
+        flexDirection: 'row',
+    },
+    label: {
+        width: 70, fontWeight: 'bold'
+    },
+    value: {
+        flex: 1
+    },
+    titlePet: {
+        padding:5,textAlign:'center'
+    },
+    textDescription: {
+        fontSize: 16,
+        margin: 10,
+    },
+    petBox:{
+        padding:5,margin:5,borderColor: '#4e7845',borderBottomWidth:2
+    },
+    petBoxContact:{
+        padding:5,margin:5
+    },
+    card: {
+        height:null,
+        paddingTop:10,
+        paddingBottom:10,
+        marginTop:5,
+        backgroundColor: '#FFFFFF',
+        flexDirection: 'column',
+        borderTopWidth:40,
+        borderColor: "#4e7845",
+        marginBottom:20,
+    },
+    cardContent:{
+        flexDirection:'row',
+        marginLeft:10,
+    },
+    imageContent:{
+        marginTop:-40,
+    },
+    tagsContent:{
+        marginTop:10,
+        flexWrap:'wrap'
+    },
+    image:{
+        width:60,
+        height:60,
+        borderRadius:30,
+    },
+    name:{
+        fontSize:20,
+        fontWeight: 'bold',
+        marginLeft:10,
+        alignSelf: 'center'
+    },
+
+
+});
