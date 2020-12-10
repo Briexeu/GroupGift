@@ -41,6 +41,11 @@ export default class LoginForm extends React.Component{
             this.endLoading();
         }
     };
+
+    //funktion der laver asykront kald til db og submitter
+    handleCreateUser = async () => {
+        this.props.navigation.navigate('SignUpForm')
+    };
     //render der bestemmer hvad der skal vises når brugeren kommer ind på siden.
     render(){
         const { errorMessage, email, password, isCompleted } = this.state;
@@ -89,7 +94,7 @@ export default class LoginForm extends React.Component{
         if (isLoading) {
             return <ActivityIndicator />;
         }
-        return <Button onPress={this.handleSubmit} title="Opret Bruger!" />;
+        return <Button onPress={this.handleCreateUser} title="Opret Bruger!" />;
     };
     renderButton3 = () => {
         const { isLoading } = this.state;
