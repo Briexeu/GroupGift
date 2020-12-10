@@ -1,4 +1,4 @@
-//Lavet af Magnus Espensen
+
 
 import * as React from 'react';
 import {
@@ -173,25 +173,27 @@ export default class AddPet extends React.Component {
                 <ScrollView style={{marginTop: 20}}>
 
                     <View style={styles.tekstBox}>
-                    <Text>Udfyld venligst nedenstående</Text>
+                    <Text style={styles.textA}>Udfyld venligst nedenstående felter for at tilføje dit kæledyr på markedspladsen. {"\n"}</Text>
 
                     {/* Navn */}
                     <TextInput
                         underlineColorAndroid = "transparent"
                         placeholder = " Navn"
                         placeholderTextColor = "#4e7845"
-                        autoCapitalize = "none"
+                        autoCapitalize = "sentences"
                         style={styles.input2}
                         value={title}
                         onChangeText={this.handleTitleChange}
                     />
+
+                    <Text style={styles.textA}>Beskrivelse</Text>
 
                         {/* Beskrivelse */}
                         <TextInput
                             underlineColorAndroid = "transparent"
                             placeholder = " Fortæl os om dit kæledyr"
                             placeholderTextColor = "#4e7845"
-                            autoCapitalize = "none"
+                            autoCapitalize = "sentences"
                             style={styles.input2}
                             value={extra}
                             onChangeText={this.handleExtraChange}
@@ -202,7 +204,7 @@ export default class AddPet extends React.Component {
                             underlineColorAndroid = "transparent"
                             placeholder = " Kategori fx. Hunt, Kat, Mus.."
                             placeholderTextColor = "#4e7845"
-                            autoCapitalize = "none"
+                            autoCapitalize = "sentences"
                             style={styles.input2}
                             value={type}
                             onChangeText={this.handleTypeChange}
@@ -213,7 +215,7 @@ export default class AddPet extends React.Component {
                             underlineColorAndroid = "transparent"
                             placeholder = " Race fx. Labrador, Norsk Skovkat.."
                             placeholderTextColor = "#4e7845"
-                            autoCapitalize = "none"
+                            autoCapitalize = "sentences"
                             style={styles.input2}
                             value={race}
                             onChangeText={this.handleRaceChange}
@@ -224,7 +226,7 @@ export default class AddPet extends React.Component {
                             underlineColorAndroid = "transparent"
                             placeholder = " Hvor gammel er dit kæledyr?"
                             placeholderTextColor = "#4e7845"
-                            autoCapitalize = "none"
+                            autoCapitalize = "sentences"
                             style={styles.input2}
                             value={alder}
                             onChangeText={this.handleAlderChange}
@@ -235,7 +237,7 @@ export default class AddPet extends React.Component {
                             underlineColorAndroid = "transparent"
                             placeholder = " Køn"
                             placeholderTextColor = "#4e7845"
-                            autoCapitalize = "none"
+                            autoCapitalize = "sentences"
                             style={styles.input2}
                             value={gender}
                             onChangeText={this.handleGenderChange}
@@ -246,7 +248,7 @@ export default class AddPet extends React.Component {
                             underlineColorAndroid = "transparent"
                             placeholder = " Pris DKK"
                             placeholderTextColor = "#4e7845"
-                            autoCapitalize = "none"
+                            autoCapitalize = "sentences"
                             style={styles.input2}
                             value={price}
                             onChangeText={this.handlePriceChange}
@@ -258,7 +260,7 @@ export default class AddPet extends React.Component {
                             underlineColorAndroid = "transparent"
                             placeholder = " Billede (URL)"
                             placeholderTextColor = "#4e7845"
-                            autoCapitalize = "none"
+                            autoCapitalize = "sentences"
                             style={styles.input2}
                             value={image}
                             onChangeText={this.handleImageChange}
@@ -270,14 +272,14 @@ export default class AddPet extends React.Component {
 
 
                     <View style={styles.tekstBox}>
-                    <Title style={{textAlign:'center'}}>Kontakt information</Title>
+                    <Title style={{textAlign:'center'}}>Dine kontakt oplysninger</Title>
 
                     {/* Navn kontaktperson */}
                     <TextInput
                         underlineColorAndroid = "transparent"
                         placeholder = " Navn"
                         placeholderTextColor = "#4e7845"
-                        autoCapitalize = "none"
+                        autoCapitalize = "sentences"
                         style={styles.input2}
                         value={ccName}
                         onChangeText={this.handleccNameChange}
@@ -288,7 +290,7 @@ export default class AddPet extends React.Component {
                         underlineColorAndroid = "transparent"
                         placeholder = " Email"
                         placeholderTextColor = "#4e7845"
-                        autoCapitalize = "none"
+                        autoCapitalize = "sentences"
                         style={styles.input2}
                         value={ccEmail}
                         onChangeText={this.handleccEmailChange}
@@ -299,7 +301,7 @@ export default class AddPet extends React.Component {
                         underlineColorAndroid = "transparent"
                         placeholder = " Telefonnummer"
                         placeholderTextColor = "#4e7845"
-                        autoCapitalize = "none"
+                        autoCapitalize = "sentences"
                         style={styles.input2}
                         value={ccPhone}
                         onChangeText={this.handleccPhoneChange}
@@ -310,7 +312,7 @@ export default class AddPet extends React.Component {
                         underlineColorAndroid = "transparent"
                         placeholder = " Lokation fx Frederiksberg, Køge.."
                         placeholderTextColor = "#4e7845"
-                        autoCapitalize = "none"
+                        autoCapitalize = "sentences"
                         style={styles.input2}
                         value={lokation}
                         onChangeText={this.handleLokationChange}
@@ -409,6 +411,10 @@ const styles = StyleSheet.create({
     tekstBox:{
         padding:5,margin:5,borderColor: '#4e7845',borderBottomWidth:2
     },
+    textA: {
+        fontSize: 18,
+        marginBottom: -5,
+    }
 });
 
 
