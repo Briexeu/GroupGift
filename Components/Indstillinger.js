@@ -23,23 +23,7 @@ const Dots = ({selected}) => {
     );
 }
 
-const Skip = ({...props}) => (
-    <TouchableOpacity
-        style={{marginHorizontal:10}}
-        {...props}
-    >
-        <Text style={{fontSize:16}}>Skip</Text>
-    </TouchableOpacity>
-);
 
-const Next = ({...props}) => (
-    <TouchableOpacity
-        style={{marginHorizontal:10}}
-        {...props}
-    >
-        <Text style={{fontSize:16}}>Næste</Text>
-    </TouchableOpacity>
-);
 
 const Done = ({...props}) => (
     <TouchableOpacity
@@ -53,11 +37,8 @@ const Done = ({...props}) => (
 const OnboardingScreen = ({navigation}) => {
     return (
         <Onboarding
-            SkipButtonComponent={Skip}
-            NextButtonComponent={Next}
             DoneButtonComponent={Done}
             DotComponent={Dots}
-            onSkip={() => navigation.replace("LoginForm")}
             onDone={() => navigation.replace("LoginForm")}
 
             pages={[
