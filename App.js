@@ -10,7 +10,6 @@ import AddPet from "./Components/AddPet";
 import PetDetails from "./Components/PetDetails";
 import { AntDesign } from '@expo/vector-icons';
 import EditPet from "./Components/EditPet";
-import StartScreen from "./Components/StartScreen";
 import Indstillinger from "./Components/Indstillinger";
 import LoginForm from "./Components/User/LoginForm";
 import SignUpForm from "./Components/User/SignUpForm";
@@ -28,6 +27,7 @@ const StackNavigator = createStackNavigator(
         PetList: { screen: PetList },
         PetDetails: { screen: PetDetails },
         EditPet:{screen: EditPet},
+        AddPet:{screen: AddPet},
 
 
     },

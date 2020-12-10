@@ -18,93 +18,15 @@ import * as Permissions from 'expo-permissions';
 import * as MediaLibrary from 'expo-media-library';
 import Image from "react-native";
 import FlatList from "react-native";
-
-
-
-const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center' },
-    row: {
-        flexDirection: 'row',
-        height: 30,
-        margin: 10,
-    },
-    labelTitle: { fontWeight: 'bold', width: 80 },
-    label: { fontWeight: 'bold', width: 120 },
-    label2: { fontWeight: '500', width : 120, paddingRight :10},
-    labelInfo: { fontWeight: '500', width: 120, height: 100,},
-    input: { borderWidth: 1, flex: 1 },
-    informationText: {
-        fontSize: 18,
-        marginLeft: 5,
-        marginTop: 5,
-    },
-    inputLarge: {
-        flex: 1,
-        height: 60,
-        borderColor: 'gray',
-        borderWidth: 1,
-        //placeholderTextColor: 'gray',
-    },
-    inputSmall: {
-        flex: 1,
-        height: 30,
-        borderColor: 'gray',
-        borderWidth: 1,
-        //placeholderTextColor: 'gray',
-    },
-        btn:{
-            margin:100
-        },
-        Flatlist_render:{
-            width:'100%'
-        },
-        cameraContainer: {
-            // Her pakkes fælles style ud
-            ...containerStyle,
-            backgroundColor: '#DDF',
-
-        },
-        cameraView: {
-            marginTop: 100,
-            marginLeft: 10,
-            marginBottom:15,
-            aspectRatio: 1.2,
-            width: '100%',
-            height: 270
-        },
-        lastPhotoContainer: {
-            backgroundColor: '#DFF',
-            width: '100%',
-            height: 130,
-            margin: 0
-        },
-        galleryContainer: {
-            ...containerStyle,
-            backgroundColor: '#FDF',
-            marginBottom: 100
-        },
-        thumbnail: {
-            width: 110,
-            height: 110,
-            marginLeft: 140
-        },thumbnail2: {
-            width: 200,
-            height: 200,
-            margin: 10,
-        },
-        FlatList_image:{
-            width: 200,
-            height: 200,
-            margin: 5
-        },
-        galleryView: {
-            height: 150,
-            width: '100%',
-            flexDirection: 'row',
-        },
-});
+import {Title} from "react-native-paper";
 
 export default class AddPet extends React.Component {
+
+    static navigationOptions = ({ navigation }) => {
+        let headerTitle ='                            Detaljer                    ';
+
+        return {headerTitle}
+    }
     state = {
         title: '',
         type: '',
@@ -235,108 +157,213 @@ export default class AddPet extends React.Component {
         const { title, type, race, alder, gender, lokation, extra, image, price,} = this.state;
 
         return (
-            <SafeAreaView style={styles.container}>
 
-                <View style={{marginTop: 15}}>
-                    <Text style={styles.informationText}>
-                        Du er godt på vej til at finde et nyt hjem til dit kældedyr. Vi anbefaler at du udfylder så beskrivende som muligt, da dette forøger dine chancer
-                        for at finde et nyt hjem til dit kæledyr.
-                    </Text>
 
-                </View>
+
                 <ScrollView style={{marginTop: 20}}>
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Navn</Text>
+
+                    <View style={styles.tekstBox}>
+                    <Text>Udfyld venligst nedenstående</Text>
+
+                    {/* Navn */}
+                    <TextInput
+                        underlineColorAndroid = "transparent"
+                        placeholder = " Navn"
+                        placeholderTextColor = "#4e7845"
+                        autoCapitalize = "none"
+                        style={styles.input2}
+                        value={title}
+                        onChangeText={this.handleTitleChange}
+                    />
+
+                        {/* Beskrivelse */}
                         <TextInput
-                            value={title}
-                            onChangeText={this.handleTitleChange}
-                            style={styles.input}
-                        />
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Beskrivelse</Text>
-                        <TextInput
+                            underlineColorAndroid = "transparent"
+                            placeholder = " Fortæl os om dit kæledyr"
+                            placeholderTextColor = "#4e7845"
+                            autoCapitalize = "none"
+                            style={styles.input2}
                             value={extra}
                             onChangeText={this.handleExtraChange}
-                            style={styles.input}
                         />
 
-                    </View>
-
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Kategori</Text>
+                        {/* Kategori */}
                         <TextInput
+                            underlineColorAndroid = "transparent"
+                            placeholder = " Kategori fx. Hunt, Kat, Mus.."
+                            placeholderTextColor = "#4e7845"
+                            autoCapitalize = "none"
+                            style={styles.input2}
                             value={type}
                             onChangeText={this.handleTypeChange}
-                            style={styles.input}
-                            placeholder='Fx Hund, Kat..'
-                            placeholderTextColor='grey'
                         />
-                    </View>
 
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Race</Text>
+                        {/* Race */}
                         <TextInput
+                            underlineColorAndroid = "transparent"
+                            placeholder = " Race fx. Labrador, Norsk Skovkat.."
+                            placeholderTextColor = "#4e7845"
+                            autoCapitalize = "none"
+                            style={styles.input2}
                             value={race}
                             onChangeText={this.handleRaceChange}
-                            style={styles.input}
-                       />
-                    </View>
-                                        <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Alder</Text>
+                        />
+
+                        {/* Race */}
                         <TextInput
+                            underlineColorAndroid = "transparent"
+                            placeholder = " Hvor gammel er dit kæledyr?"
+                            placeholderTextColor = "#4e7845"
+                            autoCapitalize = "none"
+                            style={styles.input2}
                             value={alder}
                             onChangeText={this.handleAlderChange}
-                            style={styles.input}
                         />
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Køn</Text>
+
+                        {/* Køn */}
                         <TextInput
+                            underlineColorAndroid = "transparent"
+                            placeholder = " Køn"
+                            placeholderTextColor = "#4e7845"
+                            autoCapitalize = "none"
+                            style={styles.input2}
                             value={gender}
                             onChangeText={this.handleGenderChange}
-                            style={styles.input}
                         />
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Lokation</Text>
+
+                        {/* Køn */}
                         <TextInput
-                            value={lokation}
-                            onChangeText={this.handleLokationChange}
-                            style={styles.input}
-                        />
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Pris</Text>
-                        <TextInput
+                            underlineColorAndroid = "transparent"
+                            placeholder = " Pris DKK"
+                            placeholderTextColor = "#4e7845"
+                            autoCapitalize = "none"
+                            style={styles.input2}
                             value={price}
                             onChangeText={this.handlePriceChange}
-                            style={styles.input}
-                            placeholder='DKK'
-                            placeholderTextColor='grey'
                         />
-                    </View>
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Billede</Text>
+
+                        {/* Billede */}
                         <TextInput
+                            label = "dude"
+                            underlineColorAndroid = "transparent"
+                            placeholder = " Billede (URL)"
+                            placeholderTextColor = "#4e7845"
+                            autoCapitalize = "none"
+                            style={styles.input2}
                             value={image}
                             onChangeText={this.handleImageChange}
-                            style={styles.input}
                         />
+
+
+
+                </View>
+
+
+
+                    <Title style={{textAlign:'center'}}>Kontakt information</Title>
+
+                    <View style={styles.row}>
+                        <Text style={styles.labelInfo}>Navn</Text>
+                        <TextInput value={lokation} onChangeText={this.handleLokationChange}  style={styles.input} />
                     </View>
+
+                    <View style={styles.row}>
+                        <Text style={styles.labelInfo}>Email</Text>
+                        <TextInput value={lokation} onChangeText={this.handleLokationChange}  style={styles.input} />
+                    </View>
+
+                    <View style={styles.row}>
+                        <Text style={styles.labelInfo}>Telefon</Text>
+                        <TextInput value={lokation} onChangeText={this.handleLokationChange}  style={styles.input} />
+                    </View>
+
+                    <View style={styles.row}>
+                        <Text style={styles.labelInfo}>Hvor befinder dette dyr sig?</Text>
+                        <TextInput value={lokation} onChangeText={this.handleLokationChange}  style={styles.input} />
+                    </View>
+
+
+
+
                     <Button title="Tilføj Dyr" onPress={this.handleSave} />
                 </ScrollView>
-                    <View style={styles.galleryContainer}>{this.renderGalleryView()}</View>
 
-            </SafeAreaView>
         );
     }
 }
-const containerStyle = {
-    padding: 5,
-    borderRadius: 1,
-    margin: 4,
-    borderWidth: 1,
-};
+const styles = StyleSheet.create({
+    container: { flex: 1, justifyContent: 'center' },
+    row: {
+        flexDirection: 'row',
+        height: 30,
+        margin: 10,
+    },
+    labelTitle: { fontWeight: 'bold', width: 80 },
+    label: { fontWeight: 'bold', width: 120 },
+    label2: { fontWeight: '500', width : 120, paddingRight :10},
+    labelInfo: { fontWeight: '500', width: 120, height: 100,},
+    input: { borderWidth: 1, flex: 1 },
+    informationText: {
+        fontSize: 18,
+        marginLeft: 5,
+        marginTop: 5,
+    },
+    inputLarge: {
+        flex: 1,
+        height: 60,
+        borderColor: 'gray',
+        borderWidth: 1,
+    },
+    inputSmall: {
+        flex: 1,
+        height: 30,
+        borderColor: 'gray',
+        borderWidth: 1,
+
+    },
+    input2: {
+        margin: 15,
+        height: 50,
+        borderColor: '#9197a1',
+        borderWidth: 1,
+        marginLeft: 0
+    },
+    btn:{
+        margin:100
+    },
+    Flatlist_render:{
+        width:'100%'
+    },
+    cameraView: {
+        marginTop: 100,
+        marginLeft: 10,
+        marginBottom:15,
+        aspectRatio: 1.2,
+        width: '100%',
+        height: 270
+    },
+    thumbnail: {
+        width: 110,
+        height: 110,
+        marginLeft: 140
+    },thumbnail2: {
+        width: 200,
+        height: 200,
+        margin: 10,
+    },
+    FlatList_image:{
+        width: 200,
+        height: 200,
+        margin: 5
+    },
+    galleryView: {
+        height: 150,
+        width: '100%',
+        flexDirection: 'row',
+    },
+    tekstBox:{
+        padding:5,margin:5,borderColor: '#4e7845',borderBottomWidth:2
+    },
+});
 
 
