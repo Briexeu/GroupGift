@@ -29,16 +29,19 @@ const styles = StyleSheet.create({
     label: { width: 100, fontWeight: 'bold' },
     value: { flex: 1 },
     titlePet: {
-        alignContent: 'center',
-        marginLeft: 125,
-        marginBottom: 5,
-        marginTop: 5,
+        padding:5,textAlign:'center'
 
     },
     textDescription: {
-        fontSize: 14,
+        fontSize: 16,
         margin: 10,
 
+    },
+    petBox:{
+        padding:5,margin:10,borderColor:'orange',borderBottomWidth:1
+    },
+    petBoxRow:{
+        padding:5,margin:5,borderColor:'orange',borderBottomWidth:1, flexDirection: 'row',
     }
 });
 
@@ -174,14 +177,35 @@ export default class PetDetails extends React.Component {
         }
         return (
             <ScrollView style={{flex: 1}}>
+
+                <View style={styles.petBox}>
+                    <Image
+                        source={{uri: pet.image}}
+                        style={{width: '100%', height: 250}}>
+                    </Image>
+                    <Title style={styles.titlePet}>Sig hej til {pet.title} 👋</Title>
+                    <Text style={styles.textDescription}>{pet.extra}</Text>
+                </View>
+
+                <View style={styles.petBoxRow}>
+                    <Text style={{textAlign: 'center'}} title={'Praktiske information \n'}> </Text>
+
+                    <Text style={styles.label}>Type</Text>
+                    <Text style={styles.value}>{pet.type}</Text>
+
+
+                </View>
+
+
+                {/*
                 <View style={styles.titlePet}>
                     <Title>Sig hej til {pet.title} 👋</Title>
                 </View>
-                {/* Billede ind her */}
+
                 <View style={styles.titlePet}>
                     <Image
                         source={{uri: pet.image}}
-                        style={{width: 150, height: 150, margin:5}}>
+                        style={{width: '100%', height: 250, margin:5}}>
                     </Image>
                 </View>
                 <View style={styles.textDescription}>
@@ -211,7 +235,7 @@ export default class PetDetails extends React.Component {
                 <View style={styles.row}>
                     <Text style={styles.label}>Pris</Text>
                     <Text style={styles.value}>{pet.price} DKK</Text>
-                </View>
+                </View> */}
                 {/* Hvis state.isLoading er true, viser vi en spinner */}
                 {isLoading && <ActivityIndicator />}
                 {/* Hvis state.users er sat, viser vi listen af users */}
@@ -227,11 +251,12 @@ export default class PetDetails extends React.Component {
                         keyExtractor={item => item.login.uuid}
                     />
                 )}
-                {/* {/* Hvis der er fejl, dvs. state.error er sat, viser vi fejlen
+                {/* Hvis der er fejl, dvs. state.error er sat, viser vi fejlen
                 {error && <Text style={styles.error}>Error: {error}</Text>}
                 <Button title="Rediger" onPress={this.handleEdit} />
                 <Button title="Slet" onPress={this.handleDelete} />
                 */}
+
             </ScrollView>
 
         );
