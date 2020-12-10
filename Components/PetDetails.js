@@ -187,18 +187,18 @@ export default class PetDetails extends React.Component {
                     <TouchableOpacity style={styles.card}>
                         <View style={styles.cardContent}>
                             <Image style={[styles.image, styles.imageContent]} source={{uri: "https://bootdey.com/img/Content/avatar/avatar6.png"}}/>
-                            <Text style={styles.name}>{"Lars C. "}</Text>
+                            <Text style={styles.name}>{pet.ccName}</Text>
                         </View>
                         <View style={[styles.cardContent, styles.tagsContent]}>
                             <Text style={styles.value}>{pet.lokation} </Text>
                         </View>
                         <View style={[styles.cardContent, styles.tagsContent]}>
                             <Text style={styles.label}>Email:</Text>
-                            <Text style={styles.value}>seja18ab@student.cbs.dk</Text>
+                            <Text style={styles.value}>{pet.ccEmail}</Text>
                         </View>
                         <View style={[styles.cardContent, styles.tagsContent]}>
                             <Text style={styles.label}>Telefon:</Text>
-                            <Text style={styles.value}> +45 31 15 40 14</Text>
+                            <Text style={styles.value}> {pet.ccPhone}</Text>
                         </View>
                     </TouchableOpacity>
 

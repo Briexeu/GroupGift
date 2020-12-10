@@ -37,10 +37,10 @@ export default class AddPet extends React.Component {
         extra: '',
         image: '',
         price: '',
-        lastPhoto:null,
-        hasCameraRollPermission: null,
-        galleryImages: null,
-        showGallery: true
+        ccName: '',
+        ccEmail: '',
+        ccPhone: '',
+
 
     };
     handleTitleChange = text => this.setState({ title: text });
@@ -61,13 +61,19 @@ export default class AddPet extends React.Component {
 
     handlePriceChange = text => this.setState({ price: text });
 
+    handleccNameChange = text => this.setState({ ccName: text });
+
+    handleccPhoneChange = text => this.setState({ ccPhone: text });
+
+    handleccEmailChange = text => this.setState({ ccEmail: text });
+
     handleSave = () => {
-        const { title, type, race, alder, gender, lokation, extra, image, price } = this.state;
+        const { title, type, race, alder, gender, lokation, extra, image, price, ccEmail, ccName, ccPhone } = this.state;
         try {
             const reference = firebase
                 .database()
                 .ref('/Pets/')
-                .push({ title, type, race, alder, gender, lokation, extra, image, price });
+                .push({ title, type, race, alder, gender, lokation, extra, image, price, ccName, ccPhone, ccEmail });
             Alert.alert(`Saved`);
             this.setState({
                 title:'',
@@ -79,6 +85,10 @@ export default class AddPet extends React.Component {
                 extra: '',
                 image: '',
                 price: '',
+                ccName: '',
+                ccEmail: '',
+                ccPhone: '',
+
             });
         } catch (error) {
             Alert.alert(`Error: ${error.message}`);
@@ -154,7 +164,7 @@ export default class AddPet extends React.Component {
         );
     }
     render() {
-        const { title, type, race, alder, gender, lokation, extra, image, price,} = this.state;
+        const { title, type, race, alder, gender, lokation, extra, image, price, ccPhone, ccName, ccEmail} = this.state;
 
         return (
 
@@ -259,33 +269,62 @@ export default class AddPet extends React.Component {
                 </View>
 
 
-
+                    <View style={styles.tekstBox}>
                     <Title style={{textAlign:'center'}}>Kontakt information</Title>
 
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Navn</Text>
-                        <TextInput value={lokation} onChangeText={this.handleLokationChange}  style={styles.input} />
+                    {/* Navn kontaktperson */}
+                    <TextInput
+                        underlineColorAndroid = "transparent"
+                        placeholder = " Navn"
+                        placeholderTextColor = "#4e7845"
+                        autoCapitalize = "none"
+                        style={styles.input2}
+                        value={ccName}
+                        onChangeText={this.handleccNameChange}
+                    />
+
+                    {/* Email kontaktperson */}
+                    <TextInput
+                        underlineColorAndroid = "transparent"
+                        placeholder = " Email"
+                        placeholderTextColor = "#4e7845"
+                        autoCapitalize = "none"
+                        style={styles.input2}
+                        value={ccEmail}
+                        onChangeText={this.handleccEmailChange}
+                    />
+
+                    {/* Tlf kontaktperson */}
+                    <TextInput
+                        underlineColorAndroid = "transparent"
+                        placeholder = " Telefonnummer"
+                        placeholderTextColor = "#4e7845"
+                        autoCapitalize = "none"
+                        style={styles.input2}
+                        value={ccPhone}
+                        onChangeText={this.handleccPhoneChange}
+                    />
+
+                    {/* Lokation */}
+                    <TextInput
+                        underlineColorAndroid = "transparent"
+                        placeholder = " Lokation fx Frederiksberg, Køge.."
+                        placeholderTextColor = "#4e7845"
+                        autoCapitalize = "none"
+                        style={styles.input2}
+                        value={lokation}
+                        onChangeText={this.handleLokationChange}
+                    />
+
+                    {/* Knappen der tilføjer dyret med de respektive felter */}
+
+                    <TouchableOpacity
+                        style = {styles.submitBtn}
+                        onPress={this.handleSave}>
+                        <Text style={{color: 'white', textAlign: 'center', fontSize: 18 }}> Tilføj dyr </Text>
+                    </TouchableOpacity>
                     </View>
 
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Email</Text>
-                        <TextInput value={lokation} onChangeText={this.handleLokationChange}  style={styles.input} />
-                    </View>
-
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Telefon</Text>
-                        <TextInput value={lokation} onChangeText={this.handleLokationChange}  style={styles.input} />
-                    </View>
-
-                    <View style={styles.row}>
-                        <Text style={styles.labelInfo}>Hvor befinder dette dyr sig?</Text>
-                        <TextInput value={lokation} onChangeText={this.handleLokationChange}  style={styles.input} />
-                    </View>
-
-
-
-
-                    <Button title="Tilføj Dyr" onPress={this.handleSave} />
                 </ScrollView>
 
         );
@@ -313,6 +352,12 @@ const styles = StyleSheet.create({
         height: 60,
         borderColor: 'gray',
         borderWidth: 1,
+    },
+    submitBtn: {
+        backgroundColor: '#4e7845',
+        padding: 10,
+        margin: 15,
+        height: 45,
     },
     inputSmall: {
         flex: 1,
