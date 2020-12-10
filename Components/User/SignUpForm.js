@@ -1,11 +1,16 @@
 //lavet af Frederik Reippuert
-import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator, Alert} from "react-native";
+import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator, Alert, TouchableOpacity} from "react-native";
 import * as React from "react";
 import * as firebase from "firebase";
 
 
 
 export default class SignUpForm extends React.Component{
+    static navigationOptions = ({ navigation }) => {
+        let headerTitle ='Opret Ny Bruger!';
+
+        return {headerTitle}
+    }
     //opretter states og sætter en default værdi
     state = {
         email: '',
@@ -52,7 +57,7 @@ export default class SignUpForm extends React.Component{
         }
         return (
             <View style={styles.container}>
-                <Text style={styles.welcometitle}>Sign up here to continue your way to the PetPal platform!</Text>
+                <Text style={styles.welcometitle}>Opret dig som bruger for at bruge PetPal!</Text>
                 <TextInput
                     placeholder ="Email"
                     value={email}
@@ -76,7 +81,15 @@ export default class SignUpForm extends React.Component{
                 {errorMessage && (
                     <Text style={styles.error}>Error: {errorMessage}</Text>
                 )}
-                {this.signUpButton()}
+                <View style={styles.buttonContainer}>
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={this.handleSubmit}>
+                        <Text>Opret</Text>
+                    </TouchableOpacity>
+
+                </View>
             </View>
         );
     };
@@ -97,17 +110,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        backgroundColor: '#ecf0f1',
-        width: 400,
-    },
-
-    welcometitle:{
-        textAlign: 'center',
-        alignContent: 'center',
-        width: 240,
-        fontSize: 18,
+        backgroundColor: '#4e7845',
 
     },
+
+
     error: {
         color: 'red',
     },
@@ -120,4 +127,32 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
     },
+    welcometitle:{
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: '#FFF',
+    },
+    buttonContainer:{
+        alignContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        margin: 10,
+
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 40,
+        width: 100,
+        color: '#FFF',
+        borderWidth: 1,
+        margin: 10,
+        padding: 10,
+        backgroundColor: 'rgba(255,255,255,0.9)',
+        borderRadius: 40,
+        flexDirection: "row",
+        marginBottom: 20,
+    },
+
 });

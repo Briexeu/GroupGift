@@ -5,6 +5,7 @@ import {View, Text, FlatList, TouchableOpacity, Button} from 'react-native';
 import firebase from 'firebase';
 
 import PetListItem from './PetListItem';
+import {createAppContainer} from "react-navigation";
 
 export default class PetList extends React.Component {
     state = {
@@ -41,6 +42,8 @@ export default class PetList extends React.Component {
     };
 
     render() {
+        const AppContainer = createAppContainer(TabNavigator);
+
         const { pets } = this.state;
         // Vi viser ingenting hvis der ikke er data
         if (!pets) {

@@ -1,12 +1,18 @@
 //lavet af Frederik Reippuert
-import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator} from "react-native";
+import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator, TouchableOpacity} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import * as firebase from "firebase";
 import * as React from "react";
+import PetList from "../PetList";
 
 
 
 export default class LoginForm extends React.Component{
+    static navigationOptions = ({ navigation }) => {
+        let headerTitle ='Login';
+
+        return {headerTitle}
+    }
     //opretter states og sætter en default værdi
     state = {
         email: '',
@@ -35,7 +41,7 @@ export default class LoginForm extends React.Component{
             console.log(result);
             this.endLoading();
             this.setState({ isCompleted: true });
-            this.props.navigation.navigate('PetList')
+            this.props.navigation.navigate('UserLoggedIn')
         } catch (error) {
             this.setError(error.message);
             this.endLoading();
@@ -50,12 +56,13 @@ export default class LoginForm extends React.Component{
     render(){
         const { errorMessage, email, password, isCompleted } = this.state;
         if (isCompleted) {
-            return <Text>Du er nu logget ind</Text>
+            this.props.navigation.navigate('UserLoggedIn')
         }
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content"/>
-                <Text>Login - Klar til at kigge på nogen søde kæledyr?</Text>
+                <Text style ={styles.welcometitle}>Login - Klar til at kigge på nogen søde kæledyr?</Text>
+
                 <TextInput placeholder ="Email"
                            value={email}
                            onChangeText={this.handleChangeEmail}
@@ -75,34 +82,22 @@ export default class LoginForm extends React.Component{
                 {errorMessage && (
                     <Text style={styles.error}>Error: {errorMessage}</Text>
                 )}
-                {this.renderButton()}
-                {this.renderButton2()}
-                {this.renderButton3()}
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={this.handleSubmit}>
+                        <Text>Login</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={this.handleCreateUser}>
+                        <Text>Opret Bruger!</Text>
+                    </TouchableOpacity>
+
+                </View>
             </View>
         )
     }
-    //knap der bestemmer hvad der skal ske når der trykkes Login.
-    renderButton = () => {
-        const { isLoading } = this.state;
-        if (isLoading) {
-            return <ActivityIndicator />;
-        }
-        return <Button onPress={this.handleSubmit} title="Login" />;
-    };
-    renderButton2 = () => {
-        const { isLoading } = this.state;
-        if (isLoading) {
-            return <ActivityIndicator />;
-        }
-        return <Button onPress={this.handleCreateUser} title="Opret Bruger!" />;
-    };
-    renderButton3 = () => {
-        const { isLoading } = this.state;
-        if (isLoading) {
-            return <ActivityIndicator />;
-        }
-        return <Button onPress={this.handleSubmit} title="Glemt Password?" />;
-    };
 }
 
 //styling af koomponenterne på siden
@@ -111,7 +106,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        backgroundColor: '#ecf0f1'
+        backgroundColor: '#4e7845',
+
     },
     input: {
         height: 40,
@@ -121,4 +117,34 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
     },
+    welcometitle:{
+        justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: '#FFF',
+    },
+    buttonContainer:{
+        alignContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        margin: 10,
+
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 40,
+        width: 100,
+        color: '#FFF',
+        borderWidth: 1,
+        margin: 10,
+        padding: 10,
+        backgroundColor: 'rgba(255,255,255,0.9)',
+        borderRadius: 40,
+        marginBottom: 20,
+    },
+
+
+
+
 })

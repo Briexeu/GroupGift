@@ -3,28 +3,6 @@ import * as React from 'react';
 import {View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 
-
-
-
-const Dots = ({selected}) => {
-    let backgroundColor;
-
-    backgroundColor = selected ? 'rgba(0, 0, 0, 0.8)' : 'rgba(0, 0, 0, 0.3)';
-
-    return (
-        <View
-            style={{
-                width:6,
-                height: 6,
-                marginHorizontal: 3,
-                backgroundColor
-            }}
-        />
-    );
-}
-
-
-
 const Done = ({...props}) => (
     <TouchableOpacity
         style={{marginHorizontal:10}}
@@ -38,7 +16,6 @@ const OnboardingScreen = ({navigation}) => {
     return (
         <Onboarding
             DoneButtonComponent={Done}
-            DotComponent={Dots}
             onDone={() => navigation.replace("LoginForm")}
 
             pages={[

@@ -95,74 +95,14 @@ export default class AddPet extends React.Component {
         }
     };
 
-    cameraRef = React.createRef();
 
     componentDidMount() {
         this.updateCameraRollPermission();
     }
 
-    /*Få adgang til galleri*/
-    updateCameraRollPermission = async () => {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        this.setState({ hasCameraRollPermission: status === 'granted' });
-    };
 
-    handleSettingLink = () =>{
-        Linking.openSettings()
-    }
 
-    // Hent 3 billeder fra galleriet
-    handleLoadGalleryImages = async () => {
-        try {
-            const result =  await MediaLibrary.getAssetsAsync({first:20});
-            this.setState({ galleryImages:result.assets });
-        }catch (e) {
-            console.log(e)
-        }
-    };
 
-    renderGalleryView() {
-        // Vi ingenting så længe vi venter på input fra bruger
-        const { hasCameraRollPermission, galleryImages } = this.state;
-        if (hasCameraRollPermission === null) {
-            return <View />;
-        }
-        // Vis en fejlbesked og en knap til settings hvis brugeren ikke har accepteret adgang
-        if (hasCameraRollPermission === false) {
-            return (
-                <View>
-                    <Text>No access to camera roll.</Text>
-                    <Button title="Go to settings" onPress={this.handleSettingLink} />
-                </View>
-            );
-        }
-        // Her looper vi igennem den liste af billeder som er modtaget fra CameraRoll
-        return (
-            <View>
-                <Button title="Load images" onPress={this.handleLoadGalleryImages} />
-                <View style={styles.galleryView}>
-                    {galleryImages && (
-                        <FlatList
-                            horizontal
-                            styles={styles.Flatlist_render}
-                            data={galleryImages}
-                            // Vi sender vores item, som er den enkelte user, med som prop til UserItem
-                            // Vi sender også vores event handler med som prop, så UserItem ikke skal håndtere navigation
-                            // this.handleSelectUser modtager en user som argument
-                            renderItem={({ item }) => (
-                                <Image
-                                    source={{ uri: item.uri}}
-                                    key={item.uri}
-                                    style={styles.FlatList_image}
-                                />
-                            )}
-                            keyExtractor={item => item.id}
-                        />
-                    )}
-                </View>
-            </View>
-        );
-    }
     render() {
         const { title, type, race, alder, gender, lokation, extra, image, price, ccPhone, ccName, ccEmail} = this.state;
 

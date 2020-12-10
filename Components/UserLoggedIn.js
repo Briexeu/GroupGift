@@ -13,6 +13,14 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
 } from 'react-native';
+import {createAppContainer} from "react-navigation";
+import {createBottomTabNavigator} from "react-navigation-tabs";
+import {AntDesign} from "@expo/vector-icons";
+import AddPet from "./AddPet";
+import Indstillinger from "./Indstillinger";
+
+
+
 
 export default class StartScreen extends React.Component {
 
@@ -35,22 +43,22 @@ export default class StartScreen extends React.Component {
     //render hvad der skal vises på startsiden når bruger åbner appen
     render(){
         return (
-                <View style={styles.container}>
-                    <Text style ={styles.welcometitle}>Velkommen til PetPal</Text>
-                    <View style={styles.logoContainer}>
-                        <Image style ={styles.logo}
-                               source={require('../assets/PetPalLogo.png')} />
-                        <Text style={styles.buttontitle}>Log ind eller opret dig for at se alle vores dyr!</Text>
-                    </View>
-                    <View style={styles.buttonContainer}>
-
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={this.handleGoToLogin}>
-                            <Text>Login</Text>
-                        </TouchableOpacity>
-                    </View>
+            <View style={styles.container}>
+                <Text style ={styles.welcometitle}>Velkommen Bruger X</Text>
+                <View style={styles.logoContainer}>
+                    <Image style ={styles.logo}
+                           source={require('../assets/PetPalLogo.png')} />
+                    <Text style={styles.buttontitle}>Log ind eller opret dig for at se alle vores dyr!</Text>
                 </View>
+                <View style={styles.buttonContainer}>
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={this.handleGoToLogin}>
+                        <Text>Login</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         )
     }
 }

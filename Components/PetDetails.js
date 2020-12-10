@@ -20,7 +20,7 @@ console.warn = message => {
 
 export default class PetDetails extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        let headerTitle ='                            Detaljer                    ';
+        let headerTitle ='                           Detaljer                    ';
 
         return {headerTitle}
     }

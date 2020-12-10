@@ -13,13 +13,17 @@ import EditPet from "./Components/EditPet";
 import Indstillinger from "./Components/Indstillinger";
 import LoginForm from "./Components/User/LoginForm";
 import SignUpForm from "./Components/User/SignUpForm";
+import StartScreen from "./Components/StartScreen";
+import UserLoggedIn from "./Components/UserLoggedIn";
 
 
 const LoginNavigator = createStackNavigator(
     {
-        Indstillinger: { screen: Indstillinger},
+        StartScreen: { screen: StartScreen},
         LoginForm: { screen : LoginForm },
-        SignUpForm: { screen : SignUpForm },}
+        SignUpForm: { screen : SignUpForm },
+        UserLoggedIn: { screen: UserLoggedIn},
+    }
 )
 
 const StackNavigator = createStackNavigator(
@@ -47,9 +51,9 @@ const TabNavigator = createBottomTabNavigator({
     Add1: {
         screen: StackNavigator,
         navigationOptions: {
-            tabBarLabel: "Oversigt",
+            tabBarLabel: "Dyr",
             tabBarIcon: ({tintColor}) => (
-                <AntDesign name="user" size={24} color={tintColor}/>
+                <AntDesign name="github" size={24} color={tintColor}/>
             )
         },
     },
@@ -74,8 +78,21 @@ const TabNavigator = createBottomTabNavigator({
 
 });
 
+const TabNavigator2 = createBottomTabNavigator({
+    Main: {
+        screen: LoginNavigator,
+        navigationOptions: {
+            tabBarLabel: "Forside",
+            tabBarIcon: ({tintColor}) => (
+                <AntDesign name="home" size={24} color={tintColor}/>
+            )
+        }
+    },
 
-const AppContainer = createAppContainer(TabNavigator);
+});
+
+
+const AppContainer = createAppContainer(TabNavigator2);
 
 
 export default class App extends React.Component {
