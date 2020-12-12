@@ -46,7 +46,7 @@ export default class PetList extends React.Component {
 
     render() {
         const { pets } = this.state;
-        const user=firebase.auth().currentUser;
+
         // Vi viser ingenting hvis der ikke er data
         if (!pets) {
             return null;
@@ -56,7 +56,7 @@ export default class PetList extends React.Component {
         // Vi skal også bruge alle IDer, så vi tager alle keys også.
         const petKeys = Object.keys(pets);
 
-        if(user!=null){
+
             return (
                 <View>
                     <FlatList
@@ -76,8 +76,5 @@ export default class PetList extends React.Component {
                     />
                 </View>
             );
-        } else {
-            return <text>Du er ikke logget ind!</text>
-        }
     }
 }

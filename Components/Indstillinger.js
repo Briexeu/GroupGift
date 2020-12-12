@@ -6,14 +6,18 @@ import {
     TextInput,
     Button,
     Alert,
-    ScrollView, SafeAreaView
+    ScrollView, SafeAreaView, TouchableOpacity, Image
 } from 'react-native';
 import firebase from 'firebase';
+import {Title} from "react-native-paper";
 
 
 
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center' },
+    container: { flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#4e7845',
+    },
     row: {
         flexDirection: 'row',
         height: 30,
@@ -28,8 +32,9 @@ const styles = StyleSheet.create({
 
 
 
-export default class Indstillinger extends React.Component {
 
+
+export default class Indstillinger extends React.Component {
     state={
         uid:firebase.auth().currentUser.uid,
         user:firebase.auth().currentUser,
@@ -43,6 +48,7 @@ export default class Indstillinger extends React.Component {
         city:'',
         error:true
     }
+
 
     handleNameChange = name => this.setState({ name });
 
@@ -96,105 +102,51 @@ export default class Indstillinger extends React.Component {
     }
     handleLogOut = async () => {
         await firebase.auth().signOut();
+        this.navigator='LoginNavigator';
     };
 
-    render()
-    {
+    render(){
+        const user=firebase.auth().currentUser;
         const {uid} = this.state
 
-        if(!uid){
-            return (
-                <View style={styles.container}>
-                    <AppContainer />
-                </View>
-            )
-        } else {
+
+            if (!uid) {
+                return (
+                    <View style={styles.container}>
+                        <AppContainer/>
+                    </View>
+                )
+            } else {
 
 
-            const {name, email, password, age, city, gender, postalCode, error, photoURL, uid} = this.state;
+                const {name, email, password, age, city, gender, postalCode, error, photoURL, uid} = this.state;
 
-            return (
-                <View style={styles.container}>
-                    <ScrollView>
+                return (
 
-                        <View style={styles.row}>
-                            <Text style={styles.labelTitle}>Navn: </Text>
-                            <TextInput
-                                value={name}
-                                onChangeText={this.handleNameChange}
-                                style={styles.input}
-                            />
-                        </View>
-                        <View style={styles.row}>
-                            <Text style={styles.label}>Email: </Text>
-                            <TextInput
-                                value={email}
-                                onChangeText={this.handleEmailChange}
-                                style={styles.input}
-                            />
-                        </View>
+                    <View style={styles.container}>
+                        <ScrollView>
+                            <View style={styles.row}>
+                                <Text style={styles.label}>Email: </Text>
+                                <TextInput
+                                    value={email}
+                                    onChangeText={this.handleEmailChange}
+                                    style={styles.input}
+                                />
+                            </View>
+                            <View style={styles.row}>
+                                <Text style={styles.labelTitle}>Password: </Text>
+                                <TextInput
+                                    value={password}
+                                    onChangeText={this.handlePasswordChange}
+                                    style={styles.input}
+                                />
+                            </View>
+                            <Button title="Tryk for at opdatere info" onPress={this.updateData}/>
+                            <Button title="Log ud" onPress={this.handleLogOut}/>
+                        </ScrollView>
+                    </View>
+                );
 
-
-                        <View style={styles.row}>
-                            <Text style={styles.labelTitle}>Password: </Text>
-                            <TextInput
-                                value={password}
-                                onChangeText={this.handlePasswordChange}
-                                style={styles.input}
-                            />
-                        </View>
-                        <View style={styles.row}>
-                            <Text style={styles.label}>Alder: </Text>
-                            <TextInput
-                                value={age}
-                                onChangeText={this.handleAgeChange}
-                                style={styles.input}
-                            />
-                        </View>
-                        <View style={styles.row}>
-                            <Text style={styles.label}>By: </Text>
-                            <TextInput
-                                value={city}
-                                onChangeText={this.handleCityChange}
-                                style={styles.input}
-                            />
-                        </View>
-                        <View style={styles.row}>
-                            <Text style={styles.label}>Køn: </Text>
-                            <TextInput
-                                value={gender}
-                                onChangeText={this.handleGenderChange}
-                                style={styles.input}
-                            />
-                        </View>
-
-                        <View style={styles.row}>
-                            <Text style={styles.label}>Postnummer: </Text>
-                            <TextInput
-                                value={postalCode}
-                                onChangeText={this.handlePostalcodeChange}
-                                style={styles.input}
-                            />
-                        </View>
-
-                        <View style={styles.row}>
-                            <Text style={styles.label}>Billede: </Text>
-                            <TextInput
-                                value={photoURL}
-                                onChangeText={this.handleImageChange}
-                                style={styles.input}
-                            />
-                        </View>
-
-
-                        <Button title="Tryk for at opdatere info" onPress={this.updateData}/>
-
-                        <Button title="Log ud" onPress={this.handleLogOut}/>
-
-                    </ScrollView>
-                </View>
-            );
-
-        }
+            }
     }
 }

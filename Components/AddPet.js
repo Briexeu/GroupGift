@@ -100,175 +100,165 @@ export default class AddPet extends React.Component {
 
     render() {
         const { title, type, race, alder, gender, lokation, extra, image, price, ccPhone, ccName, ccEmail} = this.state;
-
-        return (
-
-
-
+            return (
                 <ScrollView style={{marginTop: 20}}>
-
                     <View style={styles.tekstBox}>
-                    <Text style={styles.textA}>Udfyld venligst nedenstående felter for at tilføje dit kæledyr på markedspladsen. {"\n"}</Text>
-
-                    {/* Navn */}
-                    <TextInput
-                        underlineColorAndroid = "transparent"
-                        placeholder = " Navn"
-                        placeholderTextColor = "#4e7845"
-                        autoCapitalize = "sentences"
-                        style={styles.input2}
-                        value={title}
-                        onChangeText={this.handleTitleChange}
-                    />
-
-                    <Text style={styles.textA}>Beskrivelse</Text>
-
+                        <Text style={styles.textA}>Udfyld venligst nedenstående felter for at tilføje dit kæledyr på
+                            markedspladsen. {"\n"}</Text>
+                        {/* Navn */}
+                        <TextInput
+                            underlineColorAndroid="transparent"
+                            placeholder=" Navn"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
+                            style={styles.input2}
+                            value={title}
+                            onChangeText={this.handleTitleChange}
+                        />
+                        <Text style={styles.textA}>Beskrivelse</Text>
                         {/* Beskrivelse */}
                         <TextInput
-                            underlineColorAndroid = "transparent"
-                            placeholder = " Fortæl os om dit kæledyr"
-                            placeholderTextColor = "#4e7845"
-                            autoCapitalize = "sentences"
+                            underlineColorAndroid="transparent"
+                            placeholder=" Fortæl os om dit kæledyr"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
                             style={styles.input2}
                             value={extra}
                             onChangeText={this.handleExtraChange}
                         />
-
                         {/* Kategori */}
                         <TextInput
-                            underlineColorAndroid = "transparent"
-                            placeholder = " Kategori fx. Hunt, Kat, Mus.."
-                            placeholderTextColor = "#4e7845"
-                            autoCapitalize = "sentences"
+                            underlineColorAndroid="transparent"
+                            placeholder=" Kategori fx. Hunt, Kat, Mus.."
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
                             style={styles.input2}
                             value={type}
                             onChangeText={this.handleTypeChange}
                         />
-
                         {/* Race */}
                         <TextInput
-                            underlineColorAndroid = "transparent"
-                            placeholder = " Race fx. Labrador, Norsk Skovkat.."
-                            placeholderTextColor = "#4e7845"
-                            autoCapitalize = "sentences"
+                            underlineColorAndroid="transparent"
+                            placeholder=" Race fx. Labrador, Norsk Skovkat.."
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
                             style={styles.input2}
                             value={race}
                             onChangeText={this.handleRaceChange}
                         />
-
                         {/* Race */}
                         <TextInput
-                            underlineColorAndroid = "transparent"
-                            placeholder = " Hvor gammel er dit kæledyr?"
-                            placeholderTextColor = "#4e7845"
-                            autoCapitalize = "sentences"
+                            underlineColorAndroid="transparent"
+                            placeholder=" Hvor gammel er dit kæledyr?"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
                             style={styles.input2}
                             value={alder}
                             onChangeText={this.handleAlderChange}
                         />
-
                         {/* Køn */}
                         <TextInput
-                            underlineColorAndroid = "transparent"
-                            placeholder = " Køn"
-                            placeholderTextColor = "#4e7845"
-                            autoCapitalize = "sentences"
+                            underlineColorAndroid="transparent"
+                            placeholder=" Køn"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
                             style={styles.input2}
                             value={gender}
                             onChangeText={this.handleGenderChange}
                         />
-
                         {/* Køn */}
                         <TextInput
-                            underlineColorAndroid = "transparent"
-                            placeholder = " Pris DKK"
-                            placeholderTextColor = "#4e7845"
-                            autoCapitalize = "sentences"
+                            underlineColorAndroid="transparent"
+                            placeholder=" Pris DKK"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
                             style={styles.input2}
                             value={price}
                             onChangeText={this.handlePriceChange}
                         />
-
                         {/* Billede */}
                         <TextInput
-                            label = "dude"
-                            underlineColorAndroid = "transparent"
-                            placeholder = " Billede (URL)"
-                            placeholderTextColor = "#4e7845"
-                            autoCapitalize = "sentences"
+                            label="dude"
+                            underlineColorAndroid="transparent"
+                            placeholder=" Billede (URL)"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
                             style={styles.input2}
                             value={image}
                             onChangeText={this.handleImageChange}
                         />
 
 
-
-                </View>
+                    </View>
 
 
                     <View style={styles.tekstBox}>
-                    <Title style={{textAlign:'center'}}>Dine kontakt oplysninger</Title>
+                        <Title style={{textAlign: 'center'}}>Dine kontakt oplysninger</Title>
 
-                    {/* Navn kontaktperson */}
-                    <TextInput
-                        underlineColorAndroid = "transparent"
-                        placeholder = " Navn"
-                        placeholderTextColor = "#4e7845"
-                        autoCapitalize = "sentences"
-                        style={styles.input2}
-                        value={ccName}
-                        onChangeText={this.handleccNameChange}
-                    />
+                        {/* Navn kontaktperson */}
+                        <TextInput
+                            underlineColorAndroid="transparent"
+                            placeholder=" Navn"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
+                            style={styles.input2}
+                            value={ccName}
+                            onChangeText={this.handleccNameChange}
+                        />
 
-                    {/* Email kontaktperson */}
-                    <TextInput
-                        underlineColorAndroid = "transparent"
-                        placeholder = " Email"
-                        placeholderTextColor = "#4e7845"
-                        autoCapitalize = "sentences"
-                        style={styles.input2}
-                        value={ccEmail}
-                        onChangeText={this.handleccEmailChange}
-                    />
+                        {/* Email kontaktperson */}
+                        <TextInput
+                            underlineColorAndroid="transparent"
+                            placeholder=" Email"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
+                            style={styles.input2}
+                            value={ccEmail}
+                            onChangeText={this.handleccEmailChange}
+                        />
 
-                    {/* Tlf kontaktperson */}
-                    <TextInput
-                        underlineColorAndroid = "transparent"
-                        placeholder = " Telefonnummer"
-                        placeholderTextColor = "#4e7845"
-                        autoCapitalize = "sentences"
-                        style={styles.input2}
-                        value={ccPhone}
-                        onChangeText={this.handleccPhoneChange}
-                    />
+                        {/* Tlf kontaktperson */}
+                        <TextInput
+                            underlineColorAndroid="transparent"
+                            placeholder=" Telefonnummer"
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
+                            style={styles.input2}
+                            value={ccPhone}
+                            onChangeText={this.handleccPhoneChange}
+                        />
 
-                    {/* Lokation */}
-                    <TextInput
-                        underlineColorAndroid = "transparent"
-                        placeholder = " Lokation fx Frederiksberg, Køge.."
-                        placeholderTextColor = "#4e7845"
-                        autoCapitalize = "sentences"
-                        style={styles.input2}
-                        value={lokation}
-                        onChangeText={this.handleLokationChange}
-                    />
+                        {/* Lokation */}
+                        <TextInput
+                            underlineColorAndroid="transparent"
+                            placeholder=" Lokation fx Frederiksberg, Køge.."
+                            placeholderTextColor="#4e7845"
+                            autoCapitalize="sentences"
+                            style={styles.input2}
+                            value={lokation}
+                            onChangeText={this.handleLokationChange}
+                        />
 
-                    {/* Knappen der tilføjer dyret med de respektive felter */}
+                        {/* Knappen der tilføjer dyret med de respektive felter */}
 
-                    <TouchableOpacity
-                        style = {styles.submitBtn}
-                        onPress={this.handleSave}>
-                        <Text style={{color: 'white', textAlign: 'center', fontSize: 18 }}> Tilføj dyr </Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.submitBtn}
+                            onPress={this.handleSave}>
+                            <Text style={{color: 'white', textAlign: 'center', fontSize: 18}}> Tilføj dyr </Text>
+                        </TouchableOpacity>
                     </View>
 
                 </ScrollView>
 
-        );
+            );
     }
 }
 const styles = StyleSheet.create({
-    container: { flex: 1, justifyContent: 'center' },
+    container: { flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#4e7845',
+
+    },
     row: {
         flexDirection: 'row',
         height: 30,

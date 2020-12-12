@@ -42,7 +42,7 @@ export default class LoginForm extends React.Component{
             console.log(result);
             this.endLoading();
             this.setState({ isCompleted: true, user: true})
-            this.props.navigation.navigate('UserLoggedIn')
+            this.props.navigation.navigate('MainMenu')
 
         } catch (error) {
             this.setError(error.message);
