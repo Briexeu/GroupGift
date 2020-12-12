@@ -3,7 +3,6 @@ import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator, TouchableO
 import {StatusBar} from "expo-status-bar";
 import * as firebase from "firebase";
 import * as React from "react";
-import PetList from "../PetList";
 
 
 
@@ -15,21 +14,23 @@ export default class LoginForm extends React.Component{
     //opretter states og sætter en default værdi
     state = {
         email: '',
-        password: '',
-        isLoading: false,
-        isCompleted: false,
         errorMessage: null,
-        user: null,
     };
-    //funktioner der sætter states til en default value
-    startLoading = () => this.setState({ isLoading: true });
-    endLoading = () => this.setState({ isLoading: false });
+
+
     setError = errorMessage => this.setState({ errorMessage });
     clearError = () => this.setState({ errorMessage: null });
 
     //funktion der gør at man kan sætte email og password
     handleChangeEmail = email => this.setState({ email });
-    handleChangePassword = password => this.setState({ password });
+
+    handlePasswordReset2 =  (email) => {
+        firebase.auth().sendPasswordResetEmail(email);
+
+    };
+    handleGoBack = async () => {
+        this.props.navigation.popToTop();
+    }
 
 
 //funktion der laver asykront kald til db og submitter
@@ -41,7 +42,7 @@ export default class LoginForm extends React.Component{
             const result = await firebase.auth().signInWithEmailAndPassword(email, password);
             console.log(result);
             this.endLoading();
-            this.setState({ isCompleted: true, user: true})
+            this.setState({ isCompleted: true, user: true});
             this.props.navigation.navigate('UserLoggedIn')
 
         } catch (error) {
@@ -50,25 +51,17 @@ export default class LoginForm extends React.Component{
         }
     };
 
-    GoToForgotPassword = async () => {
-        this.props.navigation.navigate('PasswordReset')
-
-    };
-
     //funktion der laver asykront kald til db og submitter
     handleCreateUser = async () => {
         this.props.navigation.navigate('SignUpForm')
     };
     //render der bestemmer hvad der skal vises når brugeren kommer ind på siden.
     render(){
-        const { errorMessage, email, password, isCompleted } = this.state;
-        if (isCompleted) {
-            this.props.navigation.navigate('UserLoggedIn')
-        }
+        const { errorMessage, email } = this.state;
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content"/>
-                <Text style ={styles.welcometitle}>Login - Klar til at kigge på nogen søde kæledyr?</Text>
+                <Text style ={styles.welcometitle}>Har du glemt din kode? Reset her</Text>
 
                 <TextInput placeholder ="Email"
                            value={email}
@@ -78,32 +71,19 @@ export default class LoginForm extends React.Component{
                            onSubmitEditing={()=> this.passwordInput.focus()}
                            keyboardType="email-address"
                            style={styles.input}/>
-                <TextInput placeholder ="Password"
-                           value={password}
-                           secureTextEntry
-                           onChangeText={this.handleChangePassword}
-                           placeholderTextColor ="#ecf0f1"
-                           returnKeyType= "go"
-                           ref={(input)=> this.passwordInput = input}
-                           style={styles.input}/>
                 {errorMessage && (
                     <Text style={styles.error}>Error: {errorMessage}</Text>
                 )}
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={this.handleSubmit}>
-                        <Text>Login</Text>
+                        onPress={this.handlePasswordReset2(email)}>
+                        <Text>Reset kode!</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={this.handleCreateUser}>
-                        <Text>Opret Bruger!</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this.GoToForgotPassword}>
-                        <Text>Glemt Password?</Text>
+                        onPress={this.handleGoBack}>
+                        <Text>Gå Tilbage</Text>
                     </TouchableOpacity>
 
                 </View>

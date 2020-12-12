@@ -5,6 +5,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createSwitchNavigator} from "react-navigation";
 import PetList from "./Components/PetList";
 import AddPet from "./Components/AddPet";
 import PetDetails from "./Components/PetDetails";
@@ -13,16 +14,22 @@ import EditPet from "./Components/EditPet";
 import Indstillinger from "./Components/Indstillinger";
 import LoginForm from "./Components/User/LoginForm";
 import SignUpForm from "./Components/User/SignUpForm";
+import PasswordReset from "./Components/User/PasswordReset";
 import StartScreen from "./Components/StartScreen";
 import UserLoggedIn from "./Components/UserLoggedIn";
+import userLoggedIn from "./Components/UserLoggedIn";
 
 
 const LoginNavigator = createStackNavigator(
     {
+        UserLoggedIn: { screen: userLoggedIn},
         StartScreen: { screen: StartScreen},
         LoginForm: { screen : LoginForm },
         SignUpForm: { screen : SignUpForm },
-        UserLoggedIn: { screen: UserLoggedIn},
+        PasswordReset: { screen: PasswordReset},
+    },
+    {
+        initialRouteName: 'StartScreen', headerMode: 'none'
     }
 )
 
@@ -40,7 +47,7 @@ const StackNavigator = createStackNavigator(
 
 const TabNavigator = createBottomTabNavigator({
     Main: {
-        screen: LoginNavigator,
+        screen: UserLoggedIn,
         navigationOptions: {
             tabBarLabel: "Forside",
             tabBarIcon: ({tintColor}) => (
@@ -51,9 +58,9 @@ const TabNavigator = createBottomTabNavigator({
     Add1: {
         screen: StackNavigator,
         navigationOptions: {
-            tabBarLabel: "Dyr",
+            tabBarLabel: "Oversigt",
             tabBarIcon: ({tintColor}) => (
-                <AntDesign name="github" size={24} color={tintColor}/>
+                <AntDesign name="user" size={24} color={tintColor}/>
             )
         },
     },
@@ -78,22 +85,16 @@ const TabNavigator = createBottomTabNavigator({
 
 });
 
-const TabNavigator2 = createBottomTabNavigator({
-    Main: {
-        screen: LoginNavigator,
-        navigationOptions: {
-            tabBarLabel: "Forside",
-            tabBarIcon: ({tintColor}) => (
-                <AntDesign name="home" size={24} color={tintColor}/>
-            )
-        }
+const AppContainer = createAppContainer(createSwitchNavigator(
+    {
+        MainMenu: TabNavigator,
+        Login: LoginNavigator,
+
     },
-
-});
-
-
-const AppContainer = createAppContainer(TabNavigator2);
-
+    {
+        initialRouteName:'Login'
+    }
+));
 
 export default class App extends React.Component {
     state = {user:null}
@@ -124,20 +125,11 @@ export default class App extends React.Component {
 
     }
     render() {
-        const {user} = this.state
-
-        if(!user){
-            return (
-                <View style={styles.container}>
-                    <AppContainer />
-                </View>
-            )
-        } else {
-            return (
-                <AppContainer user={user}/>
+        return (
+            <AppContainer />
             )
         }
-    }
+
 }
 
 const styles = StyleSheet.create({

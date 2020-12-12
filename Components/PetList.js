@@ -6,11 +6,14 @@ import firebase from 'firebase';
 
 import PetListItem from './PetListItem';
 import {createAppContainer} from "react-navigation";
+import user from './User/LoginForm';
 
 export default class PetList extends React.Component {
     state = {
         pets: {},
     };
+
+
     static navigationOptions = ({ navigation }) => {
         let headerTitle ='                                           Feed                    ';
 
@@ -42,9 +45,8 @@ export default class PetList extends React.Component {
     };
 
     render() {
-        const AppContainer = createAppContainer(TabNavigator);
-
         const { pets } = this.state;
+        const user=firebase.auth().currentUser;
         // Vi viser ingenting hvis der ikke er data
         if (!pets) {
             return null;
@@ -53,23 +55,29 @@ export default class PetList extends React.Component {
         const petArray = Object.values(pets);
         // Vi skal også bruge alle IDer, så vi tager alle keys også.
         const petKeys = Object.keys(pets);
-        return (
-            <View>
-                <FlatList
-                    style={{borderTopWidth: 0, borderBottomWidth: 0}}
-                    data={petArray}
-                    ItemSeparatorComponent ={this.renderSeparator}
-                    // Vi bruger petKeys til at finde ID på den aktuelle pet og returnerer dette som key, og giver det med som ID til PetListItem
-                    keyExtractor={(item, index) => petKeys[index]}
-                    renderItem={({ item, index }) => (
-                        <PetListItem
-                            pet={item}
-                            id={petKeys[index]}
-                            onSelect={this.handleSelectPet}
-                        />
-                    )}
-                />
-            </View>
-        );
+
+        if(user!=null){
+            return (
+                <View>
+                    <FlatList
+                        style={{borderTopWidth: 0, borderBottomWidth: 0}}
+
+                        data={petArray}
+                        ItemSeparatorComponent ={this.renderSeparator}
+                        // Vi bruger petKeys til at finde ID på den aktuelle pet og returnerer dette som key, og giver det med som ID til PetListItem
+                        keyExtractor={(item, index) => petKeys[index]}
+                        renderItem={({ item, index }) => (
+                            <PetListItem
+                                pet={item}
+                                id={petKeys[index]}
+                                onSelect={this.handleSelectPet}
+                            />
+                        )}
+                    />
+                </View>
+            );
+        } else {
+            return <text>Du er ikke logget ind!</text>
+        }
     }
 }

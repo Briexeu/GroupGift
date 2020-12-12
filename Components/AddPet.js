@@ -96,11 +96,6 @@ export default class AddPet extends React.Component {
     };
 
 
-    componentDidMount() {
-        this.updateCameraRollPermission();
-    }
-
-
 
 
     render() {

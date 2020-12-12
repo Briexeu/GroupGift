@@ -19,10 +19,7 @@ import {AntDesign} from "@expo/vector-icons";
 import AddPet from "./AddPet";
 import Indstillinger from "./Indstillinger";
 
-
-
-
-export default class StartScreen extends React.Component {
+export default class userLoggedIn extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         let headerTitle ='                                          PetPal';
@@ -37,11 +34,13 @@ export default class StartScreen extends React.Component {
 
     handleGoToLogin = () => {
         //Når en komponent bliver mounted via navigation, får den en prop ved navn "navigation"
-        this.props.navigation.navigate('LoginForm');
+        navigation.navigate('LoginForm');
     };
 
     //render hvad der skal vises på startsiden når bruger åbner appen
     render(){
+        //return <AppContainer1 />;
+
         return (
             <View style={styles.container}>
                 <Text style ={styles.welcometitle}>Velkommen Bruger X</Text>
