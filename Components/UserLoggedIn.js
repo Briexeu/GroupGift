@@ -34,7 +34,7 @@ export default class userLoggedIn extends React.Component {
 
     handleGoToLogin = () => {
         //Når en komponent bliver mounted via navigation, får den en prop ved navn "navigation"
-        navigation.navigate('LoginForm');
+        this.props.navigation.navigate('PetList');
     };
 
     //render hvad der skal vises på startsiden når bruger åbner appen
@@ -44,17 +44,13 @@ export default class userLoggedIn extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style ={styles.welcometitle}>Velkommen Bruger X</Text>
-                <View style={styles.logoContainer}>
-                    <Image style ={styles.logo}
-                           source={require('../assets/PetPalLogo.png')} />
-                    <Text style={styles.buttontitle}>Log ind eller opret dig for at se alle vores dyr!</Text>
-                </View>
+
                 <View style={styles.buttonContainer}>
 
                     <TouchableOpacity
                         style={styles.button}
                         onPress={this.handleGoToLogin}>
-                        <Text>Login</Text>
+                        <Text>Se alle vores pets!</Text>
                     </TouchableOpacity>
                 </View>
             </View>
