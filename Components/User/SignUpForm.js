@@ -14,7 +14,7 @@ export default class SignUpForm extends React.Component{
     //opretter states og sætter en default værdi
     state = {
         email: '',
-        password: '',
+        password: '123456',
         isLoading: false,
         isCompleted: false,
         errorMessage: null,
@@ -68,7 +68,7 @@ export default class SignUpForm extends React.Component{
                     keyboardType="email-address"
                     style={styles.input}
                 />
-                <TextInput
+                {/* <TextInput
                     placeholder ="Password"
                     value={password}
                     onChangeText={this.handleChangePassword}
@@ -77,7 +77,7 @@ export default class SignUpForm extends React.Component{
                     placeholderTextColor ="#ecf0f1"
                     ref={(input)=> this.passwordInput = input}
                     returnKeyType= "go"
-                />
+                />*/}
                 {errorMessage && (
                     <Text style={styles.error}>Error: {errorMessage}</Text>
                 )}
