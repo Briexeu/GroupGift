@@ -115,7 +115,7 @@ export default class AddPet extends React.Component {
                             value={title}
                             onChangeText={this.handleTitleChange}
                         />
-                        <Text style={styles.textA}>Beskrivelse</Text>
+
                         {/* Beskrivelse */}
                         <TextInput
                             underlineColorAndroid="transparent"

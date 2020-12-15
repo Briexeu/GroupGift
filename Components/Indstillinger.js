@@ -13,34 +13,13 @@ import {Title} from "react-native-paper";
 
 
 
-const styles = StyleSheet.create({
-    container: { flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#4e7845',
-    },
-    row: {
-        flexDirection: 'row',
-        height: 30,
-        margin: 10,
-    },
-    labelTitle: { fontWeight: 'bold', width: 80 },
-    label: { fontWeight: 'bold', width: 120 },
-    label2: { fontWeight: '500', width : 120, paddingRight :10},
-    labelInfo: { fontWeight: '500', width: 120, height: 100,},
-    input: { borderWidth: 1, flex: 1 },
-});
-
-
-
-
-
 export default class Indstillinger extends React.Component {
     state={
         uid:firebase.auth().currentUser.uid,
         user:firebase.auth().currentUser,
         email:firebase.auth().currentUser.email,
 
-        password:'',
+        password: '',
         name:'',
         gender:'',
         age:'',
@@ -53,6 +32,8 @@ export default class Indstillinger extends React.Component {
     handleNameChange = name => this.setState({ name });
 
     handleEmailChange = email => this.setState({ email });
+
+    handlePasswordChange = password => this.setState( {password});
 
     handleImageChange = image => this.setState({ image });
 
@@ -88,12 +69,27 @@ export default class Indstillinger extends React.Component {
         var user = firebase.auth().currentUser;
         const {name, email, photoUrl} = this.state
 
+        let newPass=this.state.password;
+
+
+
+        user.updatePassword(newPass).then(() => {
+        console.log("Password updated");
+        }, (error) => {
+            // gg error
+        });
+
         user.updateProfile({
             displayName: name,
             email: email,
-            photoURL: photoUrl
+            photoURL: photoUrl,
         }).then(function() {
-            // Update successful.
+            console.log("Update successful");
+            this.setState({
+                password: '',
+                email: '',
+            });
+
         }).catch(function(error) {
             // An error happened.
         });
@@ -102,7 +98,7 @@ export default class Indstillinger extends React.Component {
     }
     handleLogOut = async () => {
         await firebase.auth().signOut();
-        this.navigator='LoginNavigator';
+        this.navigator='LoginForm';
     };
 
     render(){
@@ -123,30 +119,84 @@ export default class Indstillinger extends React.Component {
 
                 return (
 
-                    <View style={styles.container}>
-                        <ScrollView>
-                            <View style={styles.row}>
-                                <Text style={styles.label}>Email: </Text>
-                                <TextInput
-                                    value={email}
-                                    onChangeText={this.handleEmailChange}
-                                    style={styles.input}
-                                />
-                            </View>
-                            <View style={styles.row}>
-                                <Text style={styles.labelTitle}>Password: </Text>
-                                <TextInput
-                                    value={password}
-                                    onChangeText={this.handlePasswordChange}
-                                    style={styles.input}
-                                />
-                            </View>
-                            <Button title="Tryk for at opdatere info" onPress={this.updateData}/>
-                            <Button title="Log ud" onPress={this.handleLogOut}/>
-                        </ScrollView>
+
+
+                    <View style={styles.tekstBox}>
+
+                        <Text style={styles.textA}>Her kan du opdatere dine login oplysninger {"\n"}</Text>
+
+
+
+                        {/* Email */}
+                        <Text>Email:</Text>
+                        <TextInput
+                            style={styles.input2}
+                            value={email}
+                            onChangeText={this.handleEmailChange}
+                        />
+
+                        {/* Password */}
+                        <Text>Password:</Text>
+                        <TextInput
+                            style={styles.input2}
+                            value={password}
+                            onChangeText={this.handlePasswordChange}
+                        />
+
+                            <TouchableOpacity
+                                style={styles.submitBtn}
+                                onPress={this.updateData}>
+                                <Text style={{color: 'white', textAlign: 'center', fontSize: 18}}> Opdatér info </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={styles.submitBtn}
+                                onPress={this.handleLogOut}>
+                                <Text style={{color: 'white', textAlign: 'center', fontSize: 18}}> Log ud </Text>
+                            </TouchableOpacity>
+
+
+
                     </View>
                 );
 
             }
     }
 }
+
+const styles = StyleSheet.create({
+    container: { flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'white',
+    },
+    row: {
+        flexDirection: 'row',
+        height: 30,
+        margin: 10,
+    },
+    input2: {
+        margin: 15,
+        height: 50,
+        borderColor: '#9197a1',
+        borderWidth: 1,
+        marginLeft: 0
+    },
+    submitBtn: {
+        backgroundColor: '#4e7845',
+        padding: 10,
+        margin: 15,
+        height: 45,
+    },
+    tekstBox: {
+        padding: 5,
+        margin: 5,
+        borderColor: '#4e7845',
+        borderBottomWidth: 2
+
+    },
+    textA: {
+        fontSize: 18,
+        marginBottom: -5,
+    }
+
+});
