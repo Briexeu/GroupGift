@@ -15,6 +15,7 @@ export default class SignUpForm extends React.Component{
     state = {
         email: '',
         password: '123456',
+        beskrivelse: '',
         isLoading: false,
         isCompleted: false,
         errorMessage: null,
@@ -28,6 +29,7 @@ export default class SignUpForm extends React.Component{
     //funktion der gør at man kan sætte email og password
     handleChangeEmail = email => this.setState({ email });
     handleChangePassword = password => this.setState({ password });
+    handleChangeBeskrivelse = beskrivelse => this.setState({ beskrivelse });
 
     //funktion der laver asykront kald til db og submitter
     handleSubmit = async () => {
@@ -41,7 +43,7 @@ export default class SignUpForm extends React.Component{
             console.log(result);
             this.endLoading();
             this.setState({ isCompleted: true });
-            Alert.alert('Du har nu oprettet dig som bruger')
+            Alert.alert('Tak! Vi behandler din profil og vender tilbage hurtigst muligt')
             this.props.navigation.navigate('LoginForm')
         } catch (error) {
             // Vi sender `message` feltet fra den error der modtages, videre.
@@ -57,7 +59,13 @@ export default class SignUpForm extends React.Component{
         }
         return (
             <View style={styles.container}>
-                <Text style={styles.welcometitle}>Opret dig som bruger for at bruge PetPal!</Text>
+                <Text style={styles.welcometitle}>For at kunne sælge kæledyr på PetPal skal du oprette dig som bruger.</Text>
+                <Text style={styles.welcometitle}>Vi går meget op i en tryg og sikker handel hos PetPal og derfor vil vi
+                muligvis kontakte for at verificere dig som bruger</Text>
+                <Text style={styles.welcometitle}>Udfyld venligst din email samt en kort beskrivelse af dig selv
+                og de(t) kæledyr som du vil give et nyt fantastisk hjem.</Text>
+                <Text style={styles.welcometitle}>Efter du har indsendt oplysningerne behandler vi din profil og vender tilbage med
+                en adgangskode således at du kan logge på vores platform</Text>
                 <TextInput
                     placeholder ="Email"
                     value={email}
@@ -68,6 +76,19 @@ export default class SignUpForm extends React.Component{
                     keyboardType="email-address"
                     style={styles.input}
                 />
+
+                <TextInput
+                    placeholder="Beskrivelse"
+                    onChangeText={this.handleChangeBeskrivelse}
+                    style={styles.inputL}
+                    placeholderTextColor = "#ecf0f1"
+                    multiline={true}
+
+
+                />
+
+
+
                 {/* <TextInput
                     placeholder ="Password"
                     value={password}
@@ -121,7 +142,7 @@ const styles = StyleSheet.create({
 
     input: {
         height: 40,
-        width: 200,
+        width: 250,
         backgroundColor: '#16a085',
         borderWidth: 1,
         margin: 10,
@@ -132,6 +153,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
         color: '#FFF',
+        padding: 5,
+        margin: 5
     },
     buttonContainer:{
         alignContent: 'center',
@@ -154,5 +177,15 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         marginBottom: 20,
     },
+    inputL: {
+        height: 90,
+        width: 250,
+        backgroundColor: '#16a085',
+        borderWidth: 1,
+        margin: 10,
+        padding: 10,
+        textAlignVertical: 'top',
+
+    }
 
 });

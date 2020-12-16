@@ -32,28 +32,28 @@ export default class userLoggedIn extends React.Component {
         this.props.navigation.navigate('SignUpForm');
     };
 
-    handleGoToLogin = () => {
+    handleGoToPets = () => {
         //Når en komponent bliver mounted via navigation, får den en prop ved navn "navigation"
         this.props.navigation.navigate('PetList');
     };
 
     //render hvad der skal vises på startsiden når bruger åbner appen
     render(){
-        //return <AppContainer1 />;
-
         return (
-            <View style={styles.container}>
-                <Text style ={styles.welcometitle}>Velkommen Bruger X</Text>
+            <View style={styles.mainBody}>
 
-                <View style={styles.buttonContainer}>
+                <Image style={styles.img} source={{uri: 'https://previews.123rf.com/images/stockgiu/stockgiu1904/stockgiu190411284/120479566-cute-funny-pets-cartoon.jpg'}}/>
 
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={this.handleGoToLogin}>
-                        <Text>Se alle vores pets!</Text>
-                    </TouchableOpacity>
-                </View>
+                <Text style={styles.titleS}>
+                    FIND DIN {"\n"} NYE BEDSTEVEN {"\n"} I DAG
+                </Text>
+
+                <TouchableOpacity style={styles.btnClick} onPress={this.handleGoToPets}>
+                    <Text style={styles.textBtn}>Ja tak!</Text>
+                </TouchableOpacity>
+
             </View>
+
         )
     }
 }
@@ -118,5 +118,43 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         marginBottom: 50,
     },
+
+
+    mainBody: {
+        marginTop: 30,
+        marginLeft: 24,
+        marginRight: 24,
+        marginBottom: 70,
+    },
+    img: {
+        width: 300,
+        height: 290,
+        marginLeft: 25,
+        marginTop: 40,
+    },
+    titleS: {
+        textAlign: 'center',
+        fontSize: 32,
+        lineHeight: 55,
+        marginTop: 20,
+        color: '#3E4993',
+    },
+    btnClick: {
+        width: 240,
+        height: 45,
+        borderRadius: 200,
+        backgroundColor: "green",
+        marginTop: 20,
+        marginLeft: 70,
+
+    },
+    textBtn: {
+        color: 'white',
+        fontSize: 18,
+        marginTop: 7,
+        fontWeight: "bold",
+        textAlign: "center",
+        width: 240,
+    }
 
 });

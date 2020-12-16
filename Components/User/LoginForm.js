@@ -68,7 +68,7 @@ export default class LoginForm extends React.Component{
         return (
             <View style={styles.container}>
                 <StatusBar barStyle="light-content"/>
-                <Text style ={styles.welcometitle}>Login - Klar til at kigge på nogen søde kæledyr?</Text>
+                <Text style ={styles.welcometitle}>Login </Text>
 
                 <TextInput placeholder ="Email"
                            value={email}
@@ -98,12 +98,12 @@ export default class LoginForm extends React.Component{
                     <TouchableOpacity
                         style={styles.button}
                         onPress={this.handleCreateUser}>
-                        <Text>Opret Bruger!</Text>
+                        <Text>Opret dig som sælger</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
                         onPress={this.GoToForgotPassword}>
-                        <Text>Glemt Password?</Text>
+                        <Text>Glemt password?</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        width: 200,
+        width: 250,
         backgroundColor: '#16a085',
         borderWidth: 1,
         margin: 10,
@@ -143,14 +143,14 @@ const styles = StyleSheet.create({
 
     },
     button: {
+        padding: 10,
+        margin: 5,
+        height: 45,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 40,
-        width: 100,
+        width: 200,
         color: '#FFF',
         borderWidth: 1,
-        margin: 10,
-        padding: 10,
         backgroundColor: 'rgba(255,255,255,0.9)',
         borderRadius: 40,
         marginBottom: 20,
