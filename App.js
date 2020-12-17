@@ -17,9 +17,11 @@ import SignUpForm from "./Components/User/SignUpForm";
 import PasswordReset from "./Components/User/PasswordReset";
 import StartScreen from "./Components/StartScreen";
 import UserLoggedIn from "./Components/UserLoggedIn";
+import PetListTwo from "./Components/PetListTwo";
 import userLoggedIn from "./Components/UserLoggedIn";
 import Auth from "./Components/Auth";
 
+console.disableYellowBox = true;
 
 const LoginNavigator = createStackNavigator(
     {
@@ -36,6 +38,7 @@ const LoginNavigator = createStackNavigator(
 
 const StackNavigator = createStackNavigator(
     {
+        PetListTwo: {screen: PetListTwo},
         PetList: { screen: PetList },
         PetDetails: { screen: PetDetails },
         EditPet:{screen: EditPet},
@@ -45,6 +48,7 @@ const StackNavigator = createStackNavigator(
     },
     { initialRouteKey: 'EditList' }
 );
+
 
 const TabNavigator = createBottomTabNavigator({
     Main: {

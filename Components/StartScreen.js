@@ -4,13 +4,7 @@ import {
     Text,
     View,
     StyleSheet,
-    Alert,
-    ActivityIndicator,
-    FlatList,
-    ScrollView,
-    Button,
     Image,
-    KeyboardAvoidingView,
     TouchableOpacity,
 } from 'react-native';
 
@@ -18,8 +12,9 @@ export default class StartScreen extends React.Component {
 
     static navigationOptions = ({ navigation }) => {
         let headerTitle ='                                          PetPal';
+        let tabBarVisible= false;
 
-        return {headerTitle}
+        return {headerTitle, tabBarVisible}
     }
 
     handleGoToSignUp = () => {
@@ -31,11 +26,17 @@ export default class StartScreen extends React.Component {
         //Når en komponent bliver mounted via navigation, får den en prop ved navn "navigation"
         this.props.navigation.navigate('LoginForm');
     };
+    handleGoToPetList = () => {
+        //Når en komponent bliver mounted via navigation, får den en prop ved navn "navigation"
+        this.props.navigation.navigate('PetListTwo');
+    };
 
     //render hvad der skal vises på startsiden når bruger åbner appen
     render(){
         return (
                 <View style={styles.container}>
+
+                    <View style={styles.box}>
                     <Text style ={styles.welcometitle}>Velkommen til PetPal</Text>
                     <View style={styles.logoContainer}>
                         <Image style ={styles.logo}
@@ -49,6 +50,13 @@ export default class StartScreen extends React.Component {
                             onPress={this.handleGoToLogin}>
                             <Text>Login</Text>
                         </TouchableOpacity>
+                        <Text styles={{}}>Eller</Text>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={this.handleGoToPetList}>
+                            <Text>Find dit næste kæledyr her</Text>
+                        </TouchableOpacity>
+                    </View>
                     </View>
                 </View>
         )
@@ -84,6 +92,11 @@ const styles = StyleSheet.create({
 
     },
 
+    box: {
+        padding:10,
+        margin:10
+    },
+
     buttontitle:{
         textAlign: 'center',
         width: 160,
@@ -109,11 +122,11 @@ const styles = StyleSheet.create({
         width: 200,
         color: '#FFF',
         borderWidth: 1,
-        margin: 10,
-        padding: 10,
+        margin: 5,
+        padding: 5,
         backgroundColor: 'rgba(255,255,255,0.2)',
         borderRadius: 40,
-        marginBottom: 50,
+        marginBottom: 20,
     },
 
 });

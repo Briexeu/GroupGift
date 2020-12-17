@@ -8,14 +8,14 @@ import PetListItem from './PetListItem';
 import {createAppContainer} from "react-navigation";
 import user from './User/LoginForm';
 
-export default class PetList extends React.Component {
+export default class PetListTwo extends React.Component {
     state = {
         pets: {},
     };
 
 
     static navigationOptions = ({ navigation }) => {
-        let headerTitle ='                                                Feed                    ';
+        let headerTitle ='                                      Feed                    ';
 
         return {headerTitle}
     }
@@ -57,24 +57,24 @@ export default class PetList extends React.Component {
         const petKeys = Object.keys(pets);
 
 
-            return (
-                <View>
-                    <FlatList
-                        style={{borderTopWidth: 0, borderBottomWidth: 0}}
+        return (
+            <View>
+                <FlatList
+                    style={{borderTopWidth: 0, borderBottomWidth: 0}}
 
-                        data={petArray}
-                        ItemSeparatorComponent ={this.renderSeparator}
-                        // Vi bruger petKeys til at finde ID på den aktuelle pet og returnerer dette som key, og giver det med som ID til PetListItem
-                        keyExtractor={(item, index) => petKeys[index]}
-                        renderItem={({ item, index }) => (
-                            <PetListItem
-                                pet={item}
-                                id={petKeys[index]}
-                                onSelect={this.handleSelectPet}
-                            />
-                        )}
-                    />
-                </View>
-            );
+                    data={petArray}
+                    ItemSeparatorComponent ={this.renderSeparator}
+                    // Vi bruger petKeys til at finde ID på den aktuelle pet og returnerer dette som key, og giver det med som ID til PetListItem
+                    keyExtractor={(item, index) => petKeys[index]}
+                    renderItem={({ item, index }) => (
+                        <PetListItem
+                            pet={item}
+                            id={petKeys[index]}
+                            onSelect={this.handleSelectPet}
+                        />
+                    )}
+                />
+            </View>
+        );
     }
 }

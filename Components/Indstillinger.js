@@ -4,9 +4,7 @@ import {
     Text,
     StyleSheet,
     TextInput,
-    Button,
-    Alert,
-    ScrollView, SafeAreaView, TouchableOpacity, Image
+    TouchableOpacity,
 } from 'react-native';
 import firebase from 'firebase';
 import {Title} from "react-native-paper";
@@ -97,8 +95,8 @@ export default class Indstillinger extends React.Component {
 
     }
     handleLogOut = async () => {
-        await firebase.auth().signOut();
-        this.navigator='LoginForm';
+        await firebase.auth().signOut().then(() => console.log('User signed out!'));
+        this.props.navigation.navigate('LoginForm');
     };
 
     render(){
