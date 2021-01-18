@@ -17,15 +17,13 @@ import SignUpForm from "./Components/User/SignUpForm";
 import PasswordReset from "./Components/User/PasswordReset";
 import StartScreen from "./Components/StartScreen";
 import UserLoggedIn from "./Components/UserLoggedIn";
-import PetListTwo from "./Components/PetListTwo";
-import userLoggedIn from "./Components/UserLoggedIn";
 import Auth from "./Components/Auth";
+
 
 console.disableYellowBox = true;
 
 const LoginNavigator = createStackNavigator(
     {
-        //UserLoggedIn: { screen: userLoggedIn}, //skal slettes fra denne stack hvis vi fikser menu
         StartScreen: { screen: StartScreen},
         LoginForm: { screen : LoginForm },
         SignUpForm: { screen : SignUpForm },
@@ -38,7 +36,6 @@ const LoginNavigator = createStackNavigator(
 
 const StackNavigator = createStackNavigator(
     {
-        PetListTwo: {screen: PetListTwo},
         PetList: { screen: PetList },
         PetDetails: { screen: PetDetails },
         EditPet:{screen: EditPet},
@@ -92,7 +89,6 @@ const TabNavigator = createBottomTabNavigator({
 
 const AppContainer = createAppContainer(createSwitchNavigator(
     {
-        //Login: LoginNavigator,
         MainMenu: TabNavigator,
         Login: LoginNavigator,
         Auth: Auth,
@@ -128,26 +124,11 @@ export default class App extends React.Component {
         firebase.auth().onAuthStateChanged(user => {
             this.setState({user});
         });
-
-
     }
+
     render() {
-        return(<AppContainer/>)
+        return (<AppContainer/>)
     }
-        /*const {user} = this.state;
-        if(user==null) {
-            return(
-                //alert(this.state.user)
-               <AppContainer/>
-
-            )
-        } else {
-            return(
-                //alert(this.state.user)
-                <AppContainer/>
-            )
-        }
-    }*/
 }
 
 const styles = StyleSheet.create({

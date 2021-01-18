@@ -5,56 +5,40 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import firebase from 'firebase';
-import {Title} from "react-native-paper";
+
 
 
 
 export default class Indstillinger extends React.Component {
-    state={
-        uid:firebase.auth().currentUser.uid,
-        user:firebase.auth().currentUser,
-        email:firebase.auth().currentUser.email,
 
+    state={
+        user: firebase.auth().currentUser,
+        uid:firebase.auth().currentUser.uid,
+        email:firebase.auth().currentUser.email,
         password: '',
         name:'',
-        gender:'',
-        age:'',
-        postalCode:'',
-        city:'',
-        error:true
     }
 
-
-    handleNameChange = name => this.setState({ name });
 
     handleEmailChange = email => this.setState({ email });
 
     handlePasswordChange = password => this.setState( {password});
 
-    handleImageChange = image => this.setState({ image });
-
-
-
-
     loadUser = async () =>{
-        firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(user =>{
+            //const uid = firebase.auth().currentUser.getIdToken()
             if (user) {
+
                 // User is signed in.
             } else {
-                // No user is signed in.
+                console.log('Bruger ikke logget ind')
+                this.props.navigation.navigate('LoginForm')// No user is signed in.
             }
         });
 
-    }
-
-    /*For ikke at logge ud efter email update køres denne funktion*/
-    reauthenticate = (currentPassword) => {
-        const user = firebase.auth().currentUser;
-        const credential = firebase.auth.EmailAuthProvider.credential(
-            user.email, currentPassword);
-        return user.reauthenticateWithCredential(credential);
     }
 
     componentDidMount() {
@@ -68,8 +52,6 @@ export default class Indstillinger extends React.Component {
         const {name, email, photoUrl} = this.state
 
         let newPass=this.state.password;
-
-
 
         user.updatePassword(newPass).then(() => {
         console.log("Password updated");
@@ -92,7 +74,6 @@ export default class Indstillinger extends React.Component {
             // An error happened.
         });
 
-
     }
     handleLogOut = async () => {
         await firebase.auth().signOut().then(() => console.log('User signed out!'));
@@ -100,25 +81,21 @@ export default class Indstillinger extends React.Component {
     };
 
     render(){
-        const user=firebase.auth().currentUser;
+
         const {uid} = this.state
+        const user = this.state
 
-
-            if (!uid) {
+            if (!user) {
                 return (
-                    <View style={styles.container}>
-                        <AppContainer/>
-                    </View>
+                    this.props.navigation.navigate('LoginForm')
                 )
             } else {
 
 
-                const {name, email, password, age, city, gender, postalCode, error, photoURL, uid} = this.state;
+                const {email, password,} = this.state;
 
                 return (
-
-
-
+                    <ScrollView>
                     <View style={styles.tekstBox}>
 
                         <Text style={styles.textA}>Her kan du opdatere dine login oplysninger {"\n"}</Text>
@@ -156,6 +133,7 @@ export default class Indstillinger extends React.Component {
 
 
                     </View>
+                    </ScrollView>
                 );
 
             }

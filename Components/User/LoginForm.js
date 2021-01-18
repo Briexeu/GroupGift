@@ -1,10 +1,7 @@
-//lavet af Frederik Reippuert
 import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator, TouchableOpacity} from "react-native";
 import {StatusBar} from "expo-status-bar";
 import * as firebase from "firebase";
 import * as React from "react";
-import PetList from "../PetList";
-
 
 
 export default class LoginForm extends React.Component{

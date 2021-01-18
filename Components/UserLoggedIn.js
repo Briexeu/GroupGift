@@ -1,4 +1,3 @@
-//lavet af Frederik Reippuert
 import * as React from 'react';
 import {
     Text,
@@ -13,11 +12,7 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
 } from 'react-native';
-import {createAppContainer} from "react-navigation";
-import {createBottomTabNavigator} from "react-navigation-tabs";
-import {AntDesign} from "@expo/vector-icons";
-import AddPet from "./AddPet";
-import Indstillinger from "./Indstillinger";
+
 
 export default class userLoggedIn extends React.Component {
 
@@ -26,11 +21,6 @@ export default class userLoggedIn extends React.Component {
 
         return {headerTitle}
     }
-
-    handleGoToSignUp = () => {
-        //Når en komponent bliver mounted via navigation, får den en prop ved navn "navigation"
-        this.props.navigation.navigate('SignUpForm');
-    };
 
     handleGoToPets = () => {
         //Når en komponent bliver mounted via navigation, får den en prop ved navn "navigation"
@@ -145,7 +135,8 @@ const styles = StyleSheet.create({
         borderRadius: 200,
         backgroundColor: "green",
         marginTop: 20,
-        marginLeft: 70,
+        marginLeft: 55,
+        alignItems: 'center',
 
     },
     textBtn: {

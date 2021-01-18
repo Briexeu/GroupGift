@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import {
     View,
@@ -14,10 +12,6 @@ import {
     Linking,
 } from 'react-native';
 import firebase from 'firebase'
-import * as Permissions from 'expo-permissions';
-import * as MediaLibrary from 'expo-media-library';
-import Image from "react-native";
-import FlatList from "react-native";
 import {Title} from "react-native-paper";
 
 export default class AddPet extends React.Component {

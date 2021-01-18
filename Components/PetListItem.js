@@ -1,5 +1,3 @@
-//Denne komponent er udarbejdet af Sebastian
-
 import * as React from 'react';
 import {
     View,

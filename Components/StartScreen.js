@@ -1,4 +1,3 @@
-//lavet af Frederik Reippuert
 import * as React from 'react';
 import {
     Text,
@@ -28,7 +27,7 @@ export default class StartScreen extends React.Component {
     };
     handleGoToPetList = () => {
         //Når en komponent bliver mounted via navigation, får den en prop ved navn "navigation"
-        this.props.navigation.navigate('PetListTwo');
+        this.props.navigation.navigate('PetList');
     };
 
     //render hvad der skal vises på startsiden når bruger åbner appen

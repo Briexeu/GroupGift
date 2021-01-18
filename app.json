@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Oevelse6Solu",
-    "slug": "Oevelse6Solu",
+    "name": "PetPal",
+    "slug": "petpal",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": ""
   }
 }
