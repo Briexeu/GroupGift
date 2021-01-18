@@ -1,4 +1,3 @@
-//lavet af Frederik Reippuert
 import {View, Text, StyleSheet, TextInput, Button, ActivityIndicator, Alert, TouchableOpacity} from "react-native";
 import * as React from "react";
 import * as firebase from "firebase";
@@ -61,11 +60,11 @@ export default class SignUpForm extends React.Component{
             <View style={styles.container}>
                 <Text style={styles.welcometitle}>For at kunne sælge kæledyr på PetPal skal du oprette dig som bruger.</Text>
                 <Text style={styles.welcometitle}>Vi går meget op i en tryg og sikker handel hos PetPal og derfor vil vi
-                muligvis kontakte for at verificere dig som bruger</Text>
+                    kontakte dig for at verificere dig som bruger</Text>
                 <Text style={styles.welcometitle}>Udfyld venligst din email samt en kort beskrivelse af dig selv
                 og de(t) kæledyr som du vil give et nyt fantastisk hjem.</Text>
                 <Text style={styles.welcometitle}>Efter du har indsendt oplysningerne behandler vi din profil og vender tilbage med
-                en adgangskode således at du kan logge på vores platform</Text>
+                en adgangskode, således at du kan logge på vores platform</Text>
                 <TextInput
                     placeholder ="Email"
                     value={email}
@@ -87,18 +86,6 @@ export default class SignUpForm extends React.Component{
 
                 />
 
-
-
-                {/* <TextInput
-                    placeholder ="Password"
-                    value={password}
-                    onChangeText={this.handleChangePassword}
-                    secureTextEntry
-                    style={styles.input}
-                    placeholderTextColor ="#ecf0f1"
-                    ref={(input)=> this.passwordInput = input}
-                    returnKeyType= "go"
-                />*/}
                 {errorMessage && (
                     <Text style={styles.error}>Error: {errorMessage}</Text>
                 )}

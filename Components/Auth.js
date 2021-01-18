@@ -17,14 +17,14 @@ export default class Auth extends React.Component {
 
         const user=firebase.auth().currentUser;
 
-        if(user==null) {
+        if(!user) {
             return(
-                //alert(this.state.user)
+
                 this.props.navigation.navigate('Login')
             )
         } else {
             return(
-                //alert(this.state.user)
+
                 this.props.navigation.navigate('MainMenu')
             )
         }

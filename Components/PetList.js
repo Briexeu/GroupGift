@@ -1,21 +1,14 @@
-//Denne komponent er udarbejdet af Sebastian
-
 import * as React from 'react';
-import {View, Text, FlatList, TouchableOpacity, Button} from 'react-native';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity, Button, ScrollView} from 'react-native';
 import firebase from 'firebase';
-
 import PetListItem from './PetListItem';
-import {createAppContainer} from "react-navigation";
-import user from './User/LoginForm';
-
 export default class PetList extends React.Component {
     state = {
         pets: {},
     };
 
-
     static navigationOptions = ({ navigation }) => {
-        let headerTitle ='                                                Feed                    ';
+        let headerTitle ='Feed';
 
         return {headerTitle}
     }
@@ -58,6 +51,7 @@ export default class PetList extends React.Component {
 
 
             return (
+                <ScrollView style={{marginTop: 20}}>
                 <View>
                     <FlatList
                         style={{borderTopWidth: 0, borderBottomWidth: 0}}
@@ -75,6 +69,7 @@ export default class PetList extends React.Component {
                         )}
                     />
                 </View>
+                </ScrollView>
             );
     }
 }

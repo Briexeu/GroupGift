@@ -1,11 +1,8 @@
-//Denne komponent er udarbejdet af Sebastian
-
 import * as React from 'react';
 import {View, Text, Platform, FlatList, StyleSheet, Button, Alert, TouchableOpacity, ActivityIndicator, Image, ScrollView} from 'react-native';
 import firebase from 'firebase';
 import { YellowBox } from 'react-native';
 import _ from 'lodash';
-import UserItem from './Api/UserItem';
 import {Title} from "react-native-paper";
 
 const USERS_URL = 'https://randomuser.me/api?results=1';
@@ -130,8 +127,6 @@ export default class PetDetails extends React.Component {
     render() {
         const  { pet } = this.state;
         const { isLoading, users, error } = this.state;
-
-
 
         if(!pet) {
             return <Text>Error</Text>;
